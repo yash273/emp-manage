@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { email, mob, name, pass } from 'src/shared/regex-rules/regex-rule';
+import { AuthService } from '../../service/auth.service';
+import { EncryptDecryptService } from 'src/shared/service/encrypt-decrypt.service';
 
 @Component({
   selector: 'app-signup',
@@ -8,10 +10,13 @@ import { email, mob, name, pass } from 'src/shared/regex-rules/regex-rule';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
+
   userForm!: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private EncryptDecryptService: EncryptDecryptService
   ) {
 
   }
@@ -48,14 +53,27 @@ export class SignupComponent implements OnInit {
 
 
   signup() {
+
     if (this.userForm.valid) {
       const formData = { ...this.userForm.value };
       delete formData.confirm_password;
-      console.log(formData);
+      formData.mobile = parseInt(formData.mobile, 10);
+      formData.role = parseInt(formData.role, 10);
+      const pass = formData.password;
+      const hashedPassword = this.EncryptDecryptService.hashPassword(pass);
+
+      console.log(formData.password);
+      const newData = { ...formData, password: hashedPassword }
+      console.log(newData)
+
+      this.authService.registerUser(newData).subscribe((res) => {
+        if (res) {
+          console.log('registered');
+        } else {
+          console.log('something went wrong');
+        }
+      });
     } else {
-      const formData = { ...this.userForm.value };
-      delete formData.confirm_password;
-      console.log(formData);
       console.log('Form is invalid. Please check the fields.');
     }
   }

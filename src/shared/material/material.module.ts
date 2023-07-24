@@ -21,7 +21,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-
+import { MatSidenavModule } from '@angular/material/sidenav';
 const matModules = [
   MatButtonModule,
   MatIconModule,
@@ -43,7 +43,8 @@ const matModules = [
   MatSortModule,
   MatMenuModule,
   DragDropModule,
-  MatListModule
+  MatListModule,
+  MatSidenavModule
 ];
 
 @NgModule({
