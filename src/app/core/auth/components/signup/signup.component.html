@@ -36,13 +36,19 @@
                 </mat-form-field>
                 <mat-form-field appearance="fill">
                     <mat-label>Password</mat-label>
-                    <input matInput formControlName="password">
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
                     <mat-error *ngIf="userForm.get('password')?.hasError('required')">This is a Required Field</mat-error>
                     <mat-error *ngIf="userForm.get('password')?.hasError('pattern')">Enter Valid Password</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill">
                     <mat-label>Confirm Password</mat-label>
-                    <input matInput formControlName="confirm_password">
+                    <input matInput [type]="hideConfirm ? 'password' : 'text'" formControlName="confirm_password">
+                    <button type="button" mat-icon-button matSuffix (click)="hideConfirm = !hideConfirm" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirm">
+                        <mat-icon>{{hideConfirm ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
                     <mat-error *ngIf="userForm.get('confirm_password')?.hasError('passwordMismatch')">Password not Matching</mat-error>
                 </mat-form-field>
                 <mat-card-actions>

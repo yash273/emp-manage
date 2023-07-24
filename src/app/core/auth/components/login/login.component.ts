@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private SharedService: SharedService,
-    private EncryptDecryptService: EncryptDecryptService
+    private encryptDecryptService: EncryptDecryptService
   ) {
 
   }
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       if (res) {
         const user = res.find((a: any) => {
           const storedHashedPassword = a.password;
-          const isPasswordValid = this.EncryptDecryptService.comparePasswords(this.loginForm.value.password, storedHashedPassword);
+          const isPasswordValid = this.encryptDecryptService.comparePasswords(this.loginForm.value.password, storedHashedPassword);
           return a.email === this.loginForm.value.email
             && isPasswordValid
         });

@@ -5,13 +5,12 @@ import * as bcrypt from 'bcryptjs';
 })
 export class EncryptDecryptService {
 
-  private readonly saltRounds = 10;
-
   constructor() { }
 
   // Hash the password using bcrypt
   hashPassword(plainPassword: string): string {
-    const salt = bcrypt.genSaltSync(this.saltRounds);
+    const saltRounds = plainPassword.length;
+    const salt = bcrypt.genSaltSync(saltRounds);
     return bcrypt.hashSync(plainPassword, salt);
   }
 

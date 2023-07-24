@@ -12,11 +12,12 @@ import { EncryptDecryptService } from 'src/shared/service/encrypt-decrypt.servic
 export class SignupComponent implements OnInit {
 
   userForm!: FormGroup;
-
+  hide: boolean = true;
+  hideConfirm: boolean = true;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private EncryptDecryptService: EncryptDecryptService
+    private encryptDecryptService: EncryptDecryptService
   ) {
 
   }
@@ -59,18 +60,16 @@ export class SignupComponent implements OnInit {
       delete formData.confirm_password;
       formData.mobile = parseInt(formData.mobile, 10);
       formData.role = parseInt(formData.role, 10);
-      const pass = formData.password;
-      const hashedPassword = this.EncryptDecryptService.hashPassword(pass);
 
-      console.log(formData.password);
-      const newData = { ...formData, password: hashedPassword }
-      console.log(newData)
+      // Hash the password using the service
+      const hashedPassword = this.encryptDecryptService.hashPassword(formData.password);
+      const newData = { ...formData, password: hashedPassword };
 
       this.authService.registerUser(newData).subscribe((res) => {
         if (res) {
-          console.log('registered');
+          console.log('Registered');
         } else {
-          console.log('something went wrong');
+          console.log('Something went wrong');
         }
       });
     } else {
