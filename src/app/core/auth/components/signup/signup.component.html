@@ -51,6 +51,34 @@
                     </button>
                     <mat-error *ngIf="userForm.get('confirm_password')?.hasError('passwordMismatch')">Password not Matching</mat-error>
                 </mat-form-field>
+                <div class="selection-div">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Country</mat-label>
+                        <mat-select formControlName="country" (selectionChange)="getStates()">
+                            <mat-option *ngFor="let country of countries" [value]="country.id">
+                                {{ country.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>State</mat-label>
+                        <mat-select formControlName="state" (selectionChange)="getCites()">
+                            <mat-option *ngFor="let state of states" [value]="state.id">
+                                {{ state.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>City</mat-label>
+                        <mat-select formControlName="city">
+                            <mat-option *ngFor="let city of cities" [value]="city.id">
+                                {{ city.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
                 <mat-card-actions>
                     <span>
                         <button mat-stroked-button color="primary" type="submit" (click)="signup()">Sign Up</button>

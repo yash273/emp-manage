@@ -1,0 +1,9 @@
+.side-container{display: flex;flex-direction: column;min-height: 100vh;
+    .top-container{display: flex;}}
+p{margin: 0 0 0 0;}
+.lower-container{display: flex;}
+.sidenav{width: 100%;max-width: 240px;}
+.example-spacer {
+    flex: 1 1 auto;
+  }
+.active-link{background-color: aquamarine;}

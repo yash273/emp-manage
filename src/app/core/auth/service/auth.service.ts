@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '../interface/user';
+import { Route, User } from '../interface/user';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -17,8 +17,15 @@ export class AuthService {
     return this.http.post<User>(environment.baseURL + `users`, data)
   }
 
-  allUsers() {
+  allUsers(): Observable<User[]> {
     return this.http.get<User[]>(environment.baseURL + `users`)
   }
 
+  getUserData(userId: number): Observable<User> {
+    return this.http.get<User>(environment.baseURL + `users/${userId}`)
+  }
+
+  getRoutes(): Observable<Route[]> {
+    return this.http.get<Route[]>(environment.baseURL + `routes`)
+  }
 }

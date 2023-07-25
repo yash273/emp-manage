@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { email, mob, name, pass } from 'src/shared/regex-rules/regex-rule';
 import { AuthService } from '../../service/auth.service';
 import { EncryptDecryptService } from 'src/shared/service/encrypt-decrypt.service';
+import { SharedService } from 'src/shared/service/shared.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,16 +15,22 @@ export class SignupComponent implements OnInit {
   userForm!: FormGroup;
   hide: boolean = true;
   hideConfirm: boolean = true;
+  countries: any;
+  states: any;
+  cities: any;
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private encryptDecryptService: EncryptDecryptService
+    private encryptDecryptService: EncryptDecryptService,
+    private sharedService: SharedService
   ) {
 
   }
 
   ngOnInit(): void {
-    this.initializeForm()
+    this.initializeForm();
+    this.getCountries();
   }
 
   initializeForm() {
@@ -34,7 +41,10 @@ export class SignupComponent implements OnInit {
       mobile: ['', [Validators.required, Validators.pattern(mob)]],
       role: ['', [Validators.required]],
       confirm_password: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.pattern(pass)]]
+      password: ['', [Validators.required, Validators.pattern(pass)]],
+      country: [null, [Validators.required]],
+      state: [null, [Validators.required]],
+      city: [null, [Validators.required]]
     },
       { validator: this.passwordMatchValidator }
     )
@@ -75,5 +85,28 @@ export class SignupComponent implements OnInit {
     } else {
       console.log('Form is invalid. Please check the fields.');
     }
+  }
+
+  getCountries() {
+    this.sharedService.getCounties().subscribe((res) => {
+      this.countries = res;
+    })
+  }
+
+  getStates() {
+    const countryId = this.userForm.get('country')?.value;
+    this.sharedService.getStates(countryId).subscribe((res) => {
+      this.states = res;
+    });
+    this.userForm.get('state')?.setValue(null);
+    this.userForm.get('city')?.setValue(null);
+  }
+
+  getCites() {
+    const stateId = this.userForm.get('state')?.value;
+    this.sharedService.getCities(stateId).subscribe((res) => {
+      this.cities = res;
+    });
+    this.userForm.get('city')?.setValue(null);
   }
 }

@@ -2,5 +2,11 @@
     .user-card{margin: auto;width: 100%;max-width: 600px;
         form{margin: auto;width: 100%;max-width: 500px;}
         mat-form-field{width: 100%;} 
-        mat-card-actions{margin-top: 20px;display: flex;justify-content: space-between;
-        }}}
+        mat-card-actions{margin-top: 20px;display: flex;justify-content: space-between;}
+        .selection-div{display: flex;justify-content: space-between;
+            mat-form-field {width: 30%;}
+        }
+    }
+}
+
+       
