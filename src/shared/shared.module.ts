@@ -3,10 +3,13 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from './material/material.module';
 // import { HeaderComponent } from './components/header/header.component';
 import { EncryptDecryptService } from './service/encrypt-decrypt.service';
+import { NameByIdPipe } from './pipes/name-by-id.pipe';
 
 @NgModule({
   declarations: [
     // HeaderComponent,
+
+    NameByIdPipe
   ],
   imports: [
     CommonModule,
@@ -14,6 +17,7 @@ import { EncryptDecryptService } from './service/encrypt-decrypt.service';
   ],
   exports: [
     // HeaderComponent,
+    NameByIdPipe
   ],
   providers: [
     EncryptDecryptService

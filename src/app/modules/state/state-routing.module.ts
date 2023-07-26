@@ -13,7 +13,7 @@ const routes: Routes = [
     component: StateAddEditComponent
   },
   {
-    path: 'edit',
+    path: 'edit/:id',
     component: StateAddEditComponent
   }
 ];
