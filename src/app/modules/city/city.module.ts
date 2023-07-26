@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { CityRoutingModule } from './city-routing.module';
 import { CityListComponent } from './components/city-list/city-list.component';
 import { CityAddEditComponent } from './components/city-add-edit/city-add-edit.component';
+import { MaterialModule } from 'src/shared/material/material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/shared/shared.module';
 
 
 @NgModule({
@@ -13,7 +16,11 @@ import { CityAddEditComponent } from './components/city-add-edit/city-add-edit.c
   ],
   imports: [
     CommonModule,
-    CityRoutingModule
+    CityRoutingModule,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class CityModule { }

@@ -13,7 +13,7 @@ export class StateAddEditComponent implements OnInit {
 
   stateForm!: FormGroup;
   countries: any;
-  stateId!: number | null;
+  stateId!: number;
   prevData: any;
 
   constructor(
@@ -42,7 +42,7 @@ export class StateAddEditComponent implements OnInit {
   }
 
   countryChange() {
-    this.stateForm.get('name')?.setValue(null)
+    this.stateForm.get('name')?.setValue(null);
   }
 
   getCountries() {
