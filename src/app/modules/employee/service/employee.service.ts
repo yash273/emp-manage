@@ -15,6 +15,6 @@ export class EmployeeService {
   }
 
   getEmployees(): Observable<User[]> {
-    return this.http.get<User[]>(environment.baseURL + `users?role=2`)
+    return this.http.get<User[]>(environment.baseURL + `users`)
   }
 }

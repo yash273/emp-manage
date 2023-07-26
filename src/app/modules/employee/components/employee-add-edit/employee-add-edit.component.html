@@ -43,7 +43,7 @@
                     <mat-error *ngIf="userForm.get('password')?.hasError('required')">This is a Required Field</mat-error>
                     <mat-error *ngIf="userForm.get('password')?.hasError('pattern')">Enter Valid Password</mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="fill">
+                <mat-form-field appearance="fill" *ngIf="!userId">
                     <mat-label>Confirm Password</mat-label>
                     <input matInput [type]="hideConfirm ? 'password' : 'text'" formControlName="confirm_password">
                     <button type="button" mat-icon-button matSuffix (click)="hideConfirm = !hideConfirm" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirm">
@@ -54,7 +54,7 @@
                 <div class="selection-div">
                     <mat-form-field appearance="fill">
                         <mat-label>Country</mat-label>
-                        <mat-select formControlName="country" (selectionChange)="getStates()">
+                        <mat-select formControlName="country" (selectionChange)="getStates(null)">
                             <mat-option *ngFor="let country of countries" [value]="country.id">
                                 {{ country.name }}
                             </mat-option>
@@ -63,7 +63,7 @@
 
                     <mat-form-field appearance="fill">
                         <mat-label>State</mat-label>
-                        <mat-select formControlName="state" (selectionChange)="getCites()">
+                        <mat-select formControlName="state" (selectionChange)="getCites(null)">
                             <mat-option *ngFor="let state of states" [value]="state.id">
                                 {{ state.name }}
                             </mat-option>
@@ -79,6 +79,17 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
+
+                <section class="example-section">
+                    <mat-label>Edit User Rights</mat-label>
+                    <div class="checkboxes-container">
+                        <ng-container formGroupName="route_rights">
+                            <ng-container *ngFor="let route of routes">
+                                <mat-checkbox [value]="route.id" [formControlName]="route.id">{{route.route}}</mat-checkbox>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </section>
                 <mat-card-actions>
                     <span>
                         <button *ngIf="!userId" mat-stroked-button color="primary" type="submit" (click)="addUser()">Add User</button>

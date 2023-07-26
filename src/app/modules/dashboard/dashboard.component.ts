@@ -21,13 +21,13 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private sharedService: SharedService
   ) {
+    this.userId = this.sharedService.getUserFromLocal();
 
   }
 
   ngOnInit(): void {
-    this.userId = this.sharedService.getUserFromLocal();
-
     this.getAllRoutes();
+    this.getUserRoutes()
   }
 
   logout() {
@@ -40,14 +40,13 @@ export class DashboardComponent implements OnInit {
     this.authService.getRoutes().subscribe((res) => {
       this.routes = res;
     });
-    this.getUserRoutes()
   }
 
   getUserRoutes() {
     // console.log(x)
     this.authService.getUserData(this.userId).subscribe((res) => {
+      this.currentUser = res;
       if (res && res.route_rights) {
-        this.currentUser = res;
         this.filteredRoutes = this.routes.filter((route) => res.route_rights.includes(route.id));
       }
     })

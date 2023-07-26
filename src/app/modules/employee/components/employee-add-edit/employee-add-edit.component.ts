@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from 'src/app/core/auth/interface/user';
+import { Route, User } from 'src/app/core/auth/interface/user';
 import { AuthService } from 'src/app/core/auth/service/auth.service';
 import { email, mob, name, pass } from 'src/shared/regex-rules/regex-rule';
 import { EncryptDecryptService } from 'src/shared/service/encrypt-decrypt.service';
@@ -20,7 +20,8 @@ export class EmployeeAddEditComponent {
   states: any;
   cities: any;
   userId!: number;
-  previousData!: User
+  previousData!: any;
+  routes!: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,17 +31,17 @@ export class EmployeeAddEditComponent {
     private router: Router,
     private route: ActivatedRoute
   ) {
-
+    this.getAllRoutes()
   }
 
   ngOnInit(): void {
     this.initializeForm();
     this.getCountries();
     this.userId = this.route.snapshot.params['id'];
-    console.log(this.userId)
     if (this.userId) {
       this.populateForm();
-    }
+    };
+
   }
 
   initializeForm() {
@@ -49,12 +50,13 @@ export class EmployeeAddEditComponent {
       last_name: ['', [Validators.required, Validators.pattern(name)]],
       email: ['', [Validators.required, Validators.pattern(email)]],
       mobile: ['', [Validators.required, Validators.pattern(mob)]],
-      role: ['', [Validators.required]],
+      role: [null, [Validators.required]],
       confirm_password: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.pattern(pass)]],
       country: [null, [Validators.required]],
       state: [null, [Validators.required]],
-      city: [null, [Validators.required]]
+      city: [null, [Validators.required]],
+      route_rights: this.formBuilder.group({})
     },
       { validator: this.passwordMatchValidator }
     )
@@ -63,7 +65,11 @@ export class EmployeeAddEditComponent {
   populateForm() {
     this.authService.getUserData(this.userId).subscribe((res) => {
       const { password, ...previousData } = res;
+      previousData.role = res.role.toString();
+      this.userForm.removeControl('confirm_password');
       this.userForm.patchValue(previousData);
+      this.getStates('update');
+      this.getCites('update');
     })
   }
 
@@ -82,13 +88,19 @@ export class EmployeeAddEditComponent {
 
   addUser() {
 
+    const routeRights = this.userForm.value.route_rights;
+    const trueRoutes = Object.keys(routeRights)
+      .filter((key) => routeRights[Number(key)])
+      .map(Number);
+
     if (this.userForm.valid) {
       const formData = { ...this.userForm.value };
       delete formData.confirm_password;
       formData.mobile = parseInt(formData.mobile, 10);
       formData.role = parseInt(formData.role, 10);
-
+      formData.route_rights = trueRoutes;
       // Hash the password using the service
+
       const hashedPassword = this.encryptDecryptService.hashPassword(formData.password);
       const newData = { ...formData, password: hashedPassword };
 
@@ -106,7 +118,31 @@ export class EmployeeAddEditComponent {
   }
 
   EditUser() {
-    console.log(this.userId)
+    const routeRights = this.userForm.value.route_rights;
+    const trueRoutes = Object.keys(routeRights)
+      .filter((key) => routeRights[Number(key)])
+      .map(Number);
+
+    if (this.userForm.valid) {
+      const formData = { ...this.userForm.value };
+      formData.role = parseInt(formData.role, 10);
+      formData.route_rights = trueRoutes;
+
+      const hashedPassword = this.encryptDecryptService.hashPassword(formData.password);
+      const newData = { ...formData, password: hashedPassword };
+
+      this.authService.updateUser(newData, this.userId).subscribe((res) => {
+        if (res) {
+          console.log('Updated');
+        } else {
+          console.log('Something went wrong');
+        }
+      });
+      this.router.navigate(['/dashboard'])
+    } else {
+      console.log('Form is invalid. Please check the fields.');
+    }
+
   }
 
   getCountries() {
@@ -115,21 +151,44 @@ export class EmployeeAddEditComponent {
     })
   }
 
-  getStates() {
+  getStates(type: string | null) {
     const countryId = this.userForm.get('country')?.value;
-    this.sharedService.getStates(countryId).subscribe((res) => {
-      this.states = res;
-    });
-    this.userForm.get('state')?.setValue(null);
-    this.userForm.get('city')?.setValue(null);
+    if (countryId) {
+      this.sharedService.getStates(countryId).subscribe((res) => {
+        this.states = res;
+      });
+    } else {
+      this.states = [];
+    } if (!type) {
+      this.userForm.get('state')?.setValue(null);
+      this.userForm.get('city')?.setValue(null);
+    }
   }
 
-  getCites() {
+  getCites(type: string | null) {
     const stateId = this.userForm.get('state')?.value;
-    this.sharedService.getCities(stateId).subscribe((res) => {
-      this.cities = res;
+    if (stateId) {
+      this.sharedService.getCities(stateId).subscribe((res) => {
+        this.cities = res;
+      });
+    } else {
+      this.cities = [];
+    } if (!type) {
+      this.userForm.get('city')?.setValue(null);
+    }
+  }
+
+  getAllRoutes() {
+    this.authService.getRoutes().subscribe((res) => {
+      res.forEach((element) => {
+        element.id = element.id.toString();
+      })
+      this.routes = res;
+      const checkboxes = <FormGroup>this.userForm.get('route_rights');
+      this.routes.forEach((option: any) => {
+        checkboxes.addControl(option.id, new FormControl(false));
+      });
     });
-    this.userForm.get('city')?.setValue(null);
   }
 
 }

@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { CountryRoutingModule } from './country-routing.module';
 import { CountryListComponent } from './components/country-list/country-list.component';
 import { CountryAddEditComponent } from './components/country-add-edit/country-add-edit.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from 'src/shared/material/material.module';
 
 
 @NgModule({
@@ -13,7 +15,10 @@ import { CountryAddEditComponent } from './components/country-add-edit/country-a
   ],
   imports: [
     CommonModule,
-    CountryRoutingModule
+    CountryRoutingModule,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class CountryModule { }

@@ -5,7 +5,7 @@ export interface User {
     last_name: string;
     mobile: number;
     password: string;
-    role: number;
+    role: number | string;
     route_rights: number[];
     country: number;
     state: number;
