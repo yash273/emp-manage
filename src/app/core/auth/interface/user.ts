@@ -6,7 +6,7 @@ export interface User {
     mobile: number;
     password: string;
     role: number;
-    'route-rights': number[];
+    route_rights: number[];
     country: number;
     state: number;
     city: number;

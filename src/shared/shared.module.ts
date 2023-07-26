@@ -1,22 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from './material/material.module';
-import { HeaderComponent } from './components/header/header.component';
-import { SharedService } from './service/shared.service';
+// import { HeaderComponent } from './components/header/header.component';
 import { EncryptDecryptService } from './service/encrypt-decrypt.service';
-
-
 
 @NgModule({
   declarations: [
-    HeaderComponent,
+    // HeaderComponent,
   ],
   imports: [
     CommonModule,
     MaterialModule,
   ],
   exports: [
-    HeaderComponent,
+    // HeaderComponent,
   ],
   providers: [
     EncryptDecryptService

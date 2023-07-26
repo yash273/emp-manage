@@ -46,11 +46,9 @@ export class DashboardComponent implements OnInit {
   getUserRoutes() {
     // console.log(x)
     this.authService.getUserData(this.userId).subscribe((res) => {
-      if (res && res['route-rights']) {
+      if (res && res.route_rights) {
         this.currentUser = res;
-        this.filteredRoutes = this.routes.filter((route) => res['route-rights'].includes(route.id));
-        console.log(this.filteredRoutes)
-
+        this.filteredRoutes = this.routes.filter((route) => res.route_rights.includes(route.id));
       }
     })
   }

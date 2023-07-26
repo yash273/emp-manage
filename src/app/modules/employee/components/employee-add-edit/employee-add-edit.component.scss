@@ -1,0 +1,10 @@
+.user-wrapper{display: flex;min-height: calc( 100vh - 80px);min-width:calc(100vw - 240px);
+    .user-card{margin: auto;width: 100%;max-width: 600px;
+        form{margin: auto;width: 100%;max-width: 500px;}
+        mat-form-field{width: 100%;} 
+        mat-card-actions{margin-top: 20px;display: flex;justify-content: space-between;}
+        .selection-div{display: flex;justify-content: space-between;
+            mat-form-field {width: 30%;}
+        }
+    }
+}

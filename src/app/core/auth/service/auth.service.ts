@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Route, User } from '../interface/user';
 import { environment } from 'src/environments/environment';
 
@@ -27,5 +27,39 @@ export class AuthService {
 
   getRoutes(): Observable<Route[]> {
     return this.http.get<Route[]>(environment.baseURL + `routes`)
+  }
+
+  routes !: number[];
+  routeId !: number;
+
+  getRouteData(route: string): Observable<Route[]> {
+    return this.http.get<Route[]>(environment.baseURL + `routes?route=${route}`)
+  }
+
+  // hasRouteAccess(userId: number, route: string): boolean {
+  //   this.getUserData(userId).subscribe((res) => {
+  //     this.routes = res.route_rights;
+  //     console.log(".", this.routes)
+  //   });
+  //   this.getRouteData(route).subscribe((res) => {
+  //     this.routeId = res.id;
+  //   });
+  //   if (this.routes && this.routeId) {
+  //     console.log("routes: ", this.routes, "routeId: ", this.routeId)
+  //   }
+
+  //   return true
+  // }
+  hasRouteAccess(userId: number, route: string): Observable<boolean> {
+    this.getRouteData(route).subscribe((res) => {
+      this.routeId = res[0].id;
+    });
+    return this.getUserData(userId).pipe(
+      map((userData) => {
+        this.routes = userData.route_rights;
+        const matchingRoute = this.routes.find((r) => r === this.routeId);
+        return !!matchingRoute;
+      })
+    );
   }
 }
