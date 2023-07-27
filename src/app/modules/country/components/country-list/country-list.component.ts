@@ -37,7 +37,7 @@ export class CountryListComponent implements OnInit {
     this.authService.hasRouteAccess(this.userId, 'country/add').subscribe((res) => {
       this.hasAccessToAdd = res;
       if (res === true) {
-        this.router.navigate([`dashboard/country/add`]);
+        this.router.navigate([`country/add`]);
       } else {
         this.router.navigateByUrl('**');
       }
@@ -47,7 +47,7 @@ export class CountryListComponent implements OnInit {
     this.authService.hasRouteAccess(this.userId, 'country/edit').subscribe((res) => {
       this.hasAccessToEdit = res;
       if (res === true) {
-        this.router.navigate([`dashboard/country/edit/${countryId}`]);
+        this.router.navigate([`country/edit/${countryId}`]);
       } else {
         this.router.navigateByUrl('**');
       }

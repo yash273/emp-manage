@@ -1,4 +1,36 @@
-<ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
-    ></ngx-charts-bar-vertical>
-<pre>{{countries | json}}</pre>
-<pre>{{this.users | json}}</pre>
+<div class="container">
+    <ngx-charts-bar-vertical [roundDomains]="roundDomains" [wrapTicks]="wrapTicks" [barPadding]="barPadding" [legendPosition]="legendPosition"
+        [view]="view" [noBarWhenZero]="noBarWhenZero" [scheme]="colorScheme" [results]="data" [gradient]="gradient" [xAxis]="showXAxis"
+        [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel">
+    </ngx-charts-bar-vertical>
+
+
+    <mat-form-field appearance="outline">
+        <mat-select [(value)]="selectedLocation">
+            <mat-option value="country" (click)="usersInCountry()">Country</mat-option>
+            <mat-option value="state" (click)="usersInState()">State</mat-option>
+            <mat-option value="city" (click)="usersInCity()">City</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+
+<div class="pie-chart-container">
+    <div class="country-div">
+        <div class="title">Users in Each Country</div>
+        <ngx-charts-pie-chart [view]="piView" [scheme]="'cool'" [results]="piCountryData" [gradient]="false" [legend]="false" [labels]="true"
+            (select)="onSelectPieCountry($event)">
+        </ngx-charts-pie-chart>
+    </div>
+    <div *ngIf="piStateData" class="state-div">
+        <div class="title">Users in {{selectedCountry.name}}</div>
+        <ngx-charts-pie-chart [view]="piView" [scheme]="'flame'" [results]="piStateData" [gradient]="false" [legend]="false" [labels]="true"
+            (select)="onSelectPieState($event)">
+        </ngx-charts-pie-chart>
+    </div>
+    <div *ngIf="piCityData" class="city-div">
+        <div class="title">Users in {{selectedState.name}}</div>
+        <ngx-charts-pie-chart [view]="piView" [scheme]="'horizon'" [results]="piCityData" [gradient]="false" [legend]="false" [labels]="true">
+        </ngx-charts-pie-chart>
+    </div>
+</div>

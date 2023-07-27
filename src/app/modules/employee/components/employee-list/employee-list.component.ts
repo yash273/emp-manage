@@ -26,7 +26,7 @@ export class EmployeeListComponent implements OnInit {
   ) {
     this.employeeService.getEmployees().subscribe((res) => {
       this.dataSource = res;
-    })
+    });
   }
 
   ngOnInit(): void {
@@ -37,7 +37,7 @@ export class EmployeeListComponent implements OnInit {
     this.authService.hasRouteAccess(this.userId, 'employee/edit').subscribe((res) => {
       this.hasAccessToEdit = res;
       if (res === true) {
-        this.router.navigate([`dashboard/employee/edit/${empId}`]);
+        this.router.navigate([`employee/edit/${empId}`]);
       } else {
         this.router.navigateByUrl('**');
       }
@@ -48,7 +48,7 @@ export class EmployeeListComponent implements OnInit {
     this.authService.hasRouteAccess(this.userId, 'employee/add').subscribe((res) => {
       this.hasAccessToAdd = res;
       if (res === true) {
-        this.router.navigate([`dashboard/employee/add`]);
+        this.router.navigate([`employee/add`]);
       } else {
         this.router.navigateByUrl('**');
       }

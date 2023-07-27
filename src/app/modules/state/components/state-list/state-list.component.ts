@@ -42,7 +42,7 @@ export class StateListComponent implements OnInit {
     this.authService.hasRouteAccess(this.userId, 'state/add').subscribe((res) => {
       this.hasAccessToAdd = res;
       if (res === true) {
-        this.router.navigate([`dashboard/state/add`]);
+        this.router.navigate([`state/add`]);
       } else {
         this.router.navigateByUrl('**');
       }
@@ -53,7 +53,7 @@ export class StateListComponent implements OnInit {
     this.authService.hasRouteAccess(this.userId, 'state/edit').subscribe((res) => {
       this.hasAccessToEdit = res;
       if (res === true) {
-        this.router.navigate([`dashboard/state/edit/${stateId}`]);
+        this.router.navigate([`state/edit/${stateId}`]);
       } else {
         this.router.navigateByUrl('**');
       }

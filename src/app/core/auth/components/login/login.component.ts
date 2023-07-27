@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
           console.log('you are successfully login');
           this.loginForm.reset();
           this.SharedService.saveUserToLocal(user)
-          this.router.navigate(['dashboard'])
+          this.router.navigate(['/dashboard'])
         } else {
           console.log('User Not Found');
         }

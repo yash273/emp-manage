@@ -1,0 +1,8 @@
+.container{display: flex;align-items: flex-end;background-color: aliceblue; padding: 20px;flex-direction: column-reverse;max-width: 800px; width: 100%;}
+.pie-chart-container{display: flex;width: fit-content;margin-top: 20px;
+    .country-div{background-color: #d3eafe;}
+    .state-div{background-color: #ece5ee ;margin: 0 20px;}
+    .city-div{background-color: #feecd4;}
+    .title{font-size: 20px;margin: 10px;}
+
+}

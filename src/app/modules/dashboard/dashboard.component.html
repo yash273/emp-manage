@@ -1,19 +1,40 @@
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="sidenav" mode="side" opened>
 
-        <mat-list>
-            <!-- Dashboard link -->
-            <mat-list-item [routerLink]="'/dashboard'">
-                <mat-icon matListItemIcon>dashboard</mat-icon>
-                <div matLine>Dashboard</div>
-            </mat-list-item>
+        <mat-accordion class="accordion">
 
-            <!-- Loop through filteredRoutes array -->
-            <mat-list-item *ngFor="let route of filteredRoutes; trackBy: trackByRouteId" [routerLink]="route.route" [routerLinkActive]="['active-link']">
-                <mat-icon matListItemIcon>{{ getIconForRoute(route.route) }}</mat-icon>
-                <div matLine>{{ route.route }}</div>
-            </mat-list-item>
-        </mat-list>
+            <mat-expansion-panel [expanded]="isLinkActive('/dashboard')" [routerLink]="'/dashboard'" [routerLinkActive]="['active-link']">
+                <mat-expansion-panel-header>
+                    <span class="header-content">
+                        <mat-icon mat-list-icon>dashboard</mat-icon>
+                        <div class="panel-header-label">Dashboard</div>
+                    </span>
+                </mat-expansion-panel-header>
+            </mat-expansion-panel>
+
+            <ng-container *ngFor="let menuItem of menuItems">
+
+                <mat-expansion-panel [expanded]="false" [routerLinkActive]="['active-link']">
+                    <mat-expansion-panel-header>
+                        <span class="header-content">
+                            <mat-icon mat-list-icon>{{getIconForRoute(menuItem.label)}}</mat-icon>
+                            <div class="panel-header-label">{{ menuItem.label | titlecase}}</div>
+                        </span>
+                    </mat-expansion-panel-header>
+
+                    <mat-nav-list>
+                        <ng-container *ngFor="let subMenuItem of menuItem.subMenuItems">
+                            <mat-list-item [routerLink]="subMenuItem.route" [routerLinkActive]="['active-link']">
+                                <div matLine *ngIf="!subMenuItem.label">{{ menuItem.label }}-list</div>
+                                <div matLine *ngIf="subMenuItem.label">{{ subMenuItem.label }}</div>
+                            </mat-list-item>
+                        </ng-container>
+                    </mat-nav-list>
+
+                </mat-expansion-panel>
+            </ng-container>
+
+        </mat-accordion>
 
     </mat-drawer>
     <div class="side-container">

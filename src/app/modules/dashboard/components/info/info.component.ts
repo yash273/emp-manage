@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { User } from 'src/app/core/auth/interface/user';
 import { AuthService } from 'src/app/core/auth/service/auth.service';
+import { CityService } from 'src/app/modules/city/service/city.service';
+import { StateService } from 'src/app/modules/state/service/state.service';
 import { SharedService } from 'src/shared/service/shared.service';
 
 interface Result {
@@ -9,117 +11,142 @@ interface Result {
   value: number;
 }
 
-export var single =
-  [
-    {
-      "name": "United States",
-      "id": 1,
-      "value": 890,
-    },
-    {
-      "name": "Canada",
-      "value": 690,
-      "id": 2
-    },
-    {
-      "name": "Australia",
-      "value": 800,
-      "id": 3
-    },
-    {
-      "name": "India",
-      "value": 400,
-      "id": 4
-    },
-    {
-      "name": "China",
-      "value": 200,
-      "id": 5
-    }
-  ]
-
 @Component({
   selector: 'app-info',
   templateUrl: './info.component.html',
   styleUrls: ['./info.component.scss']
 })
-export class InfoComponent implements OnInit {
+export class InfoComponent implements OnInit, AfterViewInit {
 
   countries: any;
   users: any;
+  states: any;
+  cities: any;
+  data!: Result[];
+  multi!: [[]];
+  selectedLocation = 'country'
+  currentCountry!: any;
+
 
   constructor(
     private sharedService: SharedService,
-    private authService: AuthService
+    private authService: AuthService,
+    private stateService: StateService,
+    private cityService: CityService
   ) {
-    this.sharedService.getCounties().subscribe((res) => {
-      this.countries = res;
-    })
-    this.authService.allUsers().subscribe((res) => {
-      this.users = res;
-      console.log(res)
-    })
   }
 
   ngOnInit(): void {
-    this.initFunction()
+    this.sharedService.getCounties().subscribe((res) => {
+      this.countries = res;
+    });
+    this.stateService.getStates().subscribe((res) => {
+      this.states = res;
+    });
+    this.cityService.getCities().subscribe((res) => {
+      this.cities = res;
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.initFunction();
   }
 
   initFunction() {
     this.authService.allUsers().subscribe((res) => {
       this.users = res;
-      const userCountByCountry: Result[] = this.countUsersByLocation(res, this.countries);
-      Object.assign(this, { userCountByCountry });
-      console.log(userCountByCountry);
+
+      setTimeout(() => {
+        this.usersInCountry();
+      }, 20)
     });
   }
 
-  single!: any[];
-  multi!: any[];
+  view: any = [800, 300];
+  piView: any = [500, 300];
 
-  view: any = [700, 400];
-
-  // options
   showXAxis = true;
   showYAxis = true;
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Country';
+  xAxisLabel = 'Locations';
   showYAxisLabel = true;
-  yAxisLabel = 'Employee';
+  showDataLabel = true;
+  yAxisLabel = 'Users';
+  colorScheme = 'picnic';
+  noBarWhenZero = false;
+  legendPosition: any = 'right';
+  barPadding = 16;
+  wrapTicks = true;
+  roundDomains = true;
+  piCountryData!: any[];
+  piStateData!: any[];
+  piCityData!: any[];
 
-  colorScheme: any = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
-  };
 
-  onSelect(event: Event) {
-    console.log(event);
-  }
-
-  countUsersByLocation(users: User[], countries: any): Result[] {
-    const countResult: { [countryId: number]: number } = {};
+  countUsersByLocation(users: any[], locations: any[], locationKey: string): Result[] {
+    const countResult: { [locationId: number]: number } = {};
 
     for (const user of users) {
-      if (countResult[user.country] === undefined) {
-        countResult[user.country] = 1;
+      if (countResult[user[locationKey]] === undefined) {
+        countResult[user[locationKey]] = 1;
       } else {
-        countResult[user.country]++;
+        countResult[user[locationKey]]++;
       }
     }
 
-    const result: Result[] = countries.map((country: any) => {
+    const result: Result[] = locations.map((location: any) => {
       return {
-        name: country.name,
-        id: country.id,
-        value: countResult[country.id].toString() || 0,
+        name: location.name,
+        value: countResult[location.id] || 0,
+        id: location.id,
       };
     });
 
     return result;
   }
 
+  usersInCountry() {
+    const data = this.countUsersByLocation(this.users, this.countries, 'country');
+    Object.assign(this, { data });
+    const piCountryData = this.countUsersByLocation(this.users, this.countries, 'country');
+    Object.assign(this, { piCountryData });
+  }
 
+  usersInState() {
+    const data = this.countUsersByLocation(this.users, this.states, 'state');
+    Object.assign(this, { data });
+  }
 
+  usersInCity() {
+    const data = this.countUsersByLocation(this.users, this.cities, 'city');
+    Object.assign(this, { data });
+  }
+
+  selectedCountry: any;
+  selectedState: any;
+
+  onSelectPieCountry(event: any) {
+    this.selectedCountry = this.countries.find((country: any) => country.name === event.name);
+    if (this.selectedCountry) {
+      const currentCountryId = this.selectedCountry.id;
+      this.sharedService.getStates(currentCountryId).subscribe((res: any) => {
+        const piStateData = this.countUsersByLocation(this.users, res, 'state');
+        Object.assign(this, { piStateData });
+      })
+    };
+  }
+
+  onSelectPieState(event: any) {
+    this.selectedState = this.states.find((state: any) => state.name === event.name);
+    if (this.selectedState) {
+      const currentStateId = this.selectedState.id;
+      this.sharedService.getCities(currentStateId).subscribe((res: any) => {
+        const piCityData = this.countUsersByLocation(this.users, res, 'city');
+        Object.assign(this, { piCityData });
+      })
+    };
+  }
 
 }

@@ -4,6 +4,16 @@ import { Route, User } from 'src/app/core/auth/interface/user';
 import { AuthService } from 'src/app/core/auth/service/auth.service';
 import { SharedService } from 'src/shared/service/shared.service';
 
+interface SubMenuItem {
+  label: string;
+  route: string;
+}
+
+interface MenuItem {
+  label: string;
+  subMenuItems: SubMenuItem[];
+}
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -32,7 +42,7 @@ export class DashboardComponent implements OnInit {
 
   logout() {
     this.sharedService.removeLoggedUser();
-    this.router.navigate(['/login'])
+    this.router.navigate(['/auth/login'])
   }
 
 
@@ -48,43 +58,63 @@ export class DashboardComponent implements OnInit {
       this.currentUser = res;
       if (res && res.route_rights) {
         this.filteredRoutes = this.routes.filter((route) => res.route_rights.includes(route.id));
+        this.change()
       }
     })
   }
 
-  // Function to provide a unique identifier for each item in *ngFor loop
-  trackByRouteId(index: number, route: any): number {
-    return route.id;
+  menuItems: MenuItem[] = [];
+
+  change() {
+
+    const routes = this.filteredRoutes;
+    const groupRoutesByMainMenu = (routes = this.filteredRoutes) => {
+      const groupedRoutes: any = {};
+
+      routes.forEach((route) => {
+        const mainMenuLabel = route.route.split('/')[0];
+
+        if (!groupedRoutes[mainMenuLabel]) {
+          groupedRoutes[mainMenuLabel] = [];
+        }
+
+        groupedRoutes[mainMenuLabel].push(route);
+      });
+
+      return groupedRoutes;
+    };
+
+    const groupedRoutes = groupRoutesByMainMenu(routes);
+
+    // Convert groupedRoutes into menuItems array
+    this.menuItems = Object.keys(groupedRoutes).map((mainMenuLabel) => {
+      return {
+        label: mainMenuLabel,
+        subMenuItems: groupedRoutes[mainMenuLabel].map((route: any) => {
+          return {
+            label: route.route.split('/').slice(1).join(' '),
+            route: `${route.route}`
+          };
+        })
+      };
+    });
+
   }
 
-
+  isLinkActive(route: string): boolean {
+    return this.router.isActive(route, true);
+  }
 
   getIconForRoute(route: string): string {
     switch (route) {
       case 'country':
         return 'public';
-      case 'country/add':
-        return 'add_circle';
-      case 'country/edit':
-        return 'edit';
       case 'state':
         return 'location_city';
-      case 'state/add':
-        return 'add_location';
-      case 'state/edit':
-        return 'edit_location';
       case 'city':
         return 'location_on';
-      case 'city/add':
-        return 'add_location_alt';
-      case 'city/edit':
-        return 'edit_location_alt';
       case 'employee':
         return 'person';
-      case 'employee/add':
-        return 'person_add';
-      case 'employee/edit':
-        return 'person_edit';
       default:
         return 'dashboard';
     }

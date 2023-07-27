@@ -43,7 +43,7 @@ export class CityListComponent implements OnInit {
     this.authService.hasRouteAccess(this.userId, 'city/edit').subscribe((res) => {
       this.hasAccessToEdit = res;
       if (res === true) {
-        this.router.navigate([`dashboard/city/edit/${cityId}`]);
+        this.router.navigate([`city/edit/${cityId}`]);
       } else {
         this.router.navigateByUrl('**');
       }
@@ -54,7 +54,7 @@ export class CityListComponent implements OnInit {
     this.authService.hasRouteAccess(this.userId, 'city/add').subscribe((res) => {
       this.hasAccessToAdd = res;
       if (res === true) {
-        this.router.navigate([`dashboard/city/add`]);
+        this.router.navigate([`city/add`]);
       } else {
         this.router.navigateByUrl('**');
       }

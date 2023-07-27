@@ -4,12 +4,12 @@ import { PageNotFoundComponent } from 'src/shared/components/page-not-found/page
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'auth',
     loadChildren: () =>
       import('./core/auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    path: 'dashboard',
+    path: '',
     loadChildren: () =>
       import('./modules/dashboard/dashboard.module').then((m) => m.DashboardModule),
   },

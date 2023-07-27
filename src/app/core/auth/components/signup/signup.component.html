@@ -37,7 +37,8 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Password</mat-label>
                     <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                     <mat-error *ngIf="userForm.get('password')?.hasError('required')">This is a Required Field</mat-error>
@@ -46,7 +47,8 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Confirm Password</mat-label>
                     <input matInput [type]="hideConfirm ? 'password' : 'text'" formControlName="confirm_password">
-                    <button type="button" mat-icon-button matSuffix (click)="hideConfirm = !hideConfirm" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirm">
+                    <button type="button" mat-icon-button matSuffix (click)="hideConfirm = !hideConfirm" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hideConfirm">
                         <mat-icon>{{hideConfirm ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                     <mat-error *ngIf="userForm.get('confirm_password')?.hasError('passwordMismatch')">Password not Matching</mat-error>
@@ -84,7 +86,7 @@
                         <button mat-stroked-button color="primary" type="submit" (click)="signup()">Sign Up</button>
                     </span>
                 </mat-card-actions>
-                <p>Already have an Account? <a routerLink="/login"> login</a></p>
+                <p>Already have an Account? <a routerLink="/auth/login"> login</a></p>
             </form>
         </mat-card-content>
     </mat-card>
