@@ -24,11 +24,9 @@ export class StateListComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {
-
     this.sharedService.getCounties().subscribe((res) => {
       this.countries = res;
     })
-
   }
 
   ngOnInit(): void {
@@ -39,24 +37,10 @@ export class StateListComponent implements OnInit {
   }
 
   addState() {
-    this.authService.hasRouteAccess(this.userId, 'state/add').subscribe((res) => {
-      this.hasAccessToAdd = res;
-      if (res === true) {
-        this.router.navigate([`state/add`]);
-      } else {
-        this.router.navigateByUrl('**');
-      }
-    })
+    this.router.navigate([`state/add`]);
   }
 
   editState(stateId: number) {
-    this.authService.hasRouteAccess(this.userId, 'state/edit').subscribe((res) => {
-      this.hasAccessToEdit = res;
-      if (res === true) {
-        this.router.navigate([`state/edit/${stateId}`]);
-      } else {
-        this.router.navigateByUrl('**');
-      }
-    })
+    this.router.navigate([`state/edit/${stateId}`]);
   }
 }

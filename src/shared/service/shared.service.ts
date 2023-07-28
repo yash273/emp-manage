@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/core/auth/interface/user';
 import { environment } from 'src/environments/environment';
+import { AlertComponent } from '../components/alert/alert.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,8 @@ import { environment } from 'src/environments/environment';
 export class SharedService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private snackBar: MatSnackBar
   ) { }
 
   saveUserToLocal(data: User) {
@@ -35,6 +38,18 @@ export class SharedService {
 
   getCities(stateId: number) {
     return this.http.get(environment.baseURL + `cities?stateId=${stateId}`)
+  }
+
+  showAlert(message: string, alertType: 'default' | 'error' | 'success') {
+    this.snackBar.openFromComponent(AlertComponent, {
+      data: {
+        message: message,
+      },
+      duration: 30000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: alertType
+    })
   }
 
 }

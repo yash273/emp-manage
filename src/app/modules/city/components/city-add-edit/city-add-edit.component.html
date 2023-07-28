@@ -28,7 +28,7 @@
         <mat-card-actions>
             <span>
                 <button *ngIf="!cityId" mat-stroked-button color="primary" type="submit" (click)="addCity()">Add City</button>
-                <button *ngIf="cityId" mat-stroked-button color="primary" type="submit" (click)="editState()">Update City</button>
+                <button *ngIf="cityId" mat-stroked-button color="primary" type="submit" (click)="editCity()">Update City</button>
                 <button mat-stroked-button color="primary" type="button" routerLink="/dashboard">Cancel</button>
             </span>
         </mat-card-actions>

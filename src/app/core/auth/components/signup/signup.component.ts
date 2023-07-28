@@ -4,6 +4,7 @@ import { email, mob, name, pass } from 'src/shared/regex-rules/regex-rule';
 import { AuthService } from '../../service/auth.service';
 import { EncryptDecryptService } from 'src/shared/service/encrypt-decrypt.service';
 import { SharedService } from 'src/shared/service/shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -21,9 +22,10 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private router: Router,
     private authService: AuthService,
     private encryptDecryptService: EncryptDecryptService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
   ) {
 
   }
@@ -71,19 +73,19 @@ export class SignupComponent implements OnInit {
       formData.mobile = parseInt(formData.mobile, 10);
       formData.role = parseInt(formData.role, 10);
 
-      // Hash the password using the service
       const hashedPassword = this.encryptDecryptService.hashPassword(formData.password);
       const newData = { ...formData, password: hashedPassword };
 
       this.authService.registerUser(newData).subscribe((res) => {
         if (res) {
-          console.log('Registered');
+          this.sharedService.showAlert("Congratulations! You Are Registered!", 'success');
+          this.router.navigate(['/login'])
         } else {
-          console.log('Something went wrong');
+          this.sharedService.showAlert("Oops! Something Went Wrong!", 'default');
         }
       });
     } else {
-      console.log('Form is invalid. Please check the fields.');
+      this.sharedService.showAlert("Form is invalid. Please check the fields.", 'error');
     }
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CountryService } from '../../service/country.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SharedService } from 'src/shared/service/shared.service';
 
 @Component({
   selector: 'app-country-add-edit',
@@ -16,6 +17,7 @@ export class CountryAddEditComponent implements OnInit {
   previousData: any;
 
   constructor(
+    private sharedService: SharedService,
     private countryService: CountryService,
     private formBuilder: FormBuilder,
     private router: Router,
@@ -38,10 +40,14 @@ export class CountryAddEditComponent implements OnInit {
   }
 
   populateForm() {
-    this.countryService.getCountryData(this.countryId).subscribe((res => {
+    this.countryService.getCountryData(this.countryId).subscribe((res) => {
       this.previousData = res;
       this.countryForm.patchValue(res);
-    }))
+    },
+      (err) => {
+        this.router.navigate(['**']);
+      }
+    );
   }
 
   addCountry() {
@@ -51,14 +57,14 @@ export class CountryAddEditComponent implements OnInit {
 
       this.countryService.addCountry(formData).subscribe((res) => {
         if (res) {
-          console.log('Added');
+          this.sharedService.showAlert("Country Added Successfully!", "success");
         } else {
-          console.log('Something went wrong');
+          this.sharedService.showAlert("Oops! Something Went Wrong!", 'default');
         }
       });
       this.router.navigate(['/dashboard'])
     } else {
-      console.log('Form is invalid. Please check the fields.');
+      this.sharedService.showAlert('Form is invalid. Please check the fields.', 'error');
     }
   }
 
@@ -67,14 +73,14 @@ export class CountryAddEditComponent implements OnInit {
       const formData = { ...this.countryForm.value };
       this.countryService.updateCountry(formData, this.countryId).subscribe((res) => {
         if (res) {
-          console.log('Updated');
+          this.sharedService.showAlert("Country Updated Successfully!", "success");
         } else {
-          console.log('Something went wrong');
+          this.sharedService.showAlert("Oops! Something Went Wrong!", 'default');
         }
       });
       this.router.navigate(['/dashboard'])
     } else {
-      console.log('Form is invalid. Please check the fields.');
+      this.sharedService.showAlert('Form is invalid. Please check the fields.', 'error');
     }
   }
 }

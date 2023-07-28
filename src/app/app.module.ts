@@ -7,11 +7,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from 'src/shared/material/material.module';
 import { PageNotFoundComponent } from 'src/shared/components/page-not-found/page-not-found.component';
+import { AlertComponent } from 'src/shared/components/alert/alert.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

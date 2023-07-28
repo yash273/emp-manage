@@ -24,7 +24,8 @@ export class DashboardComponent implements OnInit {
   routes!: Route[];
   filteredRoutes: any[] = [];
   userId!: any;
-  currentUser!: User
+  currentUser!: User;
+  menuItems: MenuItem[] = [];
 
   constructor(
     private authService: AuthService,
@@ -32,7 +33,6 @@ export class DashboardComponent implements OnInit {
     private sharedService: SharedService
   ) {
     this.userId = this.sharedService.getUserFromLocal();
-
   }
 
   ngOnInit(): void {
@@ -42,9 +42,8 @@ export class DashboardComponent implements OnInit {
 
   logout() {
     this.sharedService.removeLoggedUser();
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
   }
-
 
   getAllRoutes() {
     this.authService.getRoutes().subscribe((res) => {
@@ -61,8 +60,6 @@ export class DashboardComponent implements OnInit {
       }
     })
   }
-
-  menuItems: MenuItem[] = [];
 
   change() {
 
@@ -85,7 +82,6 @@ export class DashboardComponent implements OnInit {
 
     const groupedRoutes = groupRoutesByMainMenu(routes);
 
-    // Convert groupedRoutes into menuItems array
     this.menuItems = Object.keys(groupedRoutes).map((mainMenuLabel) => {
       return {
         label: mainMenuLabel,

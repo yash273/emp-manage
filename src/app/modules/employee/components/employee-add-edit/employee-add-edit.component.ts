@@ -70,7 +70,11 @@ export class EmployeeAddEditComponent {
       this.userForm.patchValue(previousData);
       this.getStates('update');
       this.getCites('update');
-    })
+    },
+      (err) => {
+        this.router.navigate(['**']);
+      }
+    );
   }
 
   passwordMatchValidator(form: FormGroup) {
@@ -85,9 +89,7 @@ export class EmployeeAddEditComponent {
     return null;
   }
 
-
   addUser() {
-
     const routeRights = this.userForm.value.route_rights;
     const trueRoutes = Object.keys(routeRights)
       .filter((key) => routeRights[Number(key)])
@@ -99,21 +101,20 @@ export class EmployeeAddEditComponent {
       formData.mobile = parseInt(formData.mobile, 10);
       formData.role = parseInt(formData.role, 10);
       formData.route_rights = trueRoutes;
-      // Hash the password using the service
 
       const hashedPassword = this.encryptDecryptService.hashPassword(formData.password);
       const newData = { ...formData, password: hashedPassword };
 
       this.authService.registerUser(newData).subscribe((res) => {
         if (res) {
-          console.log('Registered');
+          this.sharedService.showAlert("User Added!", 'success');
         } else {
-          console.log('Something went wrong');
+          this.sharedService.showAlert("Oops! Something Went Wrong!", 'default');
         }
       });
       this.router.navigate(['/dashboard'])
     } else {
-      console.log('Form is invalid. Please check the fields.');
+      this.sharedService.showAlert("Form is invalid. Please check the fields.", 'error');
     }
   }
 
@@ -133,14 +134,14 @@ export class EmployeeAddEditComponent {
 
       this.authService.updateUser(newData, this.userId).subscribe((res) => {
         if (res) {
-          console.log('Updated');
+          this.sharedService.showAlert("User Updated Successfully!", "success");
         } else {
-          console.log('Something went wrong');
+          this.sharedService.showAlert("Oops! Something Went Wrong!", 'default');
         }
       });
       this.router.navigate(['/dashboard'])
     } else {
-      console.log('Form is invalid. Please check the fields.');
+      this.sharedService.showAlert('Form is invalid. Please check the fields.', 'error');
     }
 
   }

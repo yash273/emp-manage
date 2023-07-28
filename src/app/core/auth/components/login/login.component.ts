@@ -18,14 +18,14 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private SharedService: SharedService,
+    private sharedService: SharedService,
     private encryptDecryptService: EncryptDecryptService
   ) {
 
   }
 
   ngOnInit(): void {
-    this.initForm()
+    this.initForm();
   }
 
   initForm() {
@@ -44,15 +44,15 @@ export class LoginComponent implements OnInit {
           return a.email === this.loginForm.value.email && isPasswordValid;
         });
         if (user) {
-          console.log('you are successfully login');
-          this.loginForm.reset();
-          this.SharedService.saveUserToLocal(user)
-          this.router.navigate(['/dashboard'])
+          this.sharedService.showAlert("Login Successful!", 'success');
+          this.sharedService.saveUserToLocal(user);
+          this.router.navigate(['/dashboard']);
         } else {
-          console.log('User Not Found');
+          this.sharedService.showAlert("User Not Found!", 'error');
+
         }
       } else {
-        console.log('Something was wrong');
+        this.sharedService.showAlert("Oops! Something Went Wrong!", 'default');
       }
     })
   }

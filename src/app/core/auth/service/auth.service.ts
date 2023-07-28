@@ -9,35 +9,35 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
 
+  routes !: number[];
+  routeId !: number | string;
+
   constructor(
     private http: HttpClient
   ) { }
 
   registerUser(data: User): Observable<User> {
-    return this.http.post<User>(environment.baseURL + `users`, data)
+    return this.http.post<User>(environment.baseURL + `users`, data);
   }
 
   updateUser(data: User, userId: number): Observable<User> {
-    return this.http.put<User>(environment.baseURL + `users/${userId}`, data)
+    return this.http.put<User>(environment.baseURL + `users/${userId}`, data);
   }
 
   allUsers(): Observable<User[]> {
-    return this.http.get<User[]>(environment.baseURL + `users`)
+    return this.http.get<User[]>(environment.baseURL + `users`);
   }
 
   getUserData(userId: number): Observable<User> {
-    return this.http.get<User>(environment.baseURL + `users/${userId}`)
+    return this.http.get<User>(environment.baseURL + `users/${userId}`);
   }
 
   getRoutes(): Observable<any[]> {
-    return this.http.get<any[]>(environment.baseURL + `routes`)
+    return this.http.get<any[]>(environment.baseURL + `routes`);
   }
 
-  routes !: number[];
-  routeId !: number | string;
-
   getRouteData(route: string): Observable<Route[]> {
-    return this.http.get<Route[]>(environment.baseURL + `routes?route=${route}`)
+    return this.http.get<Route[]>(environment.baseURL + `routes?route=${route}`);
   }
 
   hasRouteAccess(userId: number, route: string): Observable<boolean> {
@@ -51,7 +51,7 @@ export class AuthService {
         if (matchingRoute !== undefined) {
           return true;
         } else {
-          return false
+          return false;
         }
       })
     );

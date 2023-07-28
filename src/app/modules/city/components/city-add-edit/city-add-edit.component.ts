@@ -27,7 +27,7 @@ export class CityAddEditComponent implements OnInit {
   ) {
     this.stateService.getStates().subscribe((res) => {
       this.states = res;
-    })
+    });
   }
 
   ngOnInit(): void {
@@ -51,7 +51,11 @@ export class CityAddEditComponent implements OnInit {
         this.prevData = res;
         this.cityForm.get('stateId')?.disable();
         this.cityForm.patchValue(this.prevData);
-      })
+      },
+        (err) => {
+          this.router.navigate(['**']);
+        }
+      );
     }
   }
 
@@ -65,34 +69,33 @@ export class CityAddEditComponent implements OnInit {
 
       this.cityService.addCities(formData).subscribe((res) => {
         if (res) {
-          console.log('Added');
+          this.sharedService.showAlert("City Added Successfully!", "success");
         } else {
-          console.log('Something went wrong');
+          this.sharedService.showAlert("Oops! Something Went Wrong!", 'default');
         }
       });
-      this.router.navigate(['/dashboard'])
+      this.router.navigate(['/dashboard']);
     } else {
-      console.log('Form is invalid. Please check the fields.');
+      this.sharedService.showAlert('Form is invalid. Please check the fields.', 'error');
     }
   }
 
-  editState() {
+  editCity() {
     if (this.cityForm.valid) {
       this.cityForm.get('stateId')?.enable();
       const formData = { ...this.cityForm.value };
       if (this.cityId) {
-
         this.cityService.updateCity(formData, this.cityId).subscribe((res) => {
           if (res) {
-            console.log('Added');
+            this.sharedService.showAlert("City Updated Successfully!", "success");
           } else {
-            console.log('Something went wrong');
+            this.sharedService.showAlert("Oops! Something Went Wrong!", 'default');
           }
         });
+        this.router.navigate(['/dashboard']);
       }
-      this.router.navigate(['/dashboard'])
     } else {
-      console.log('Form is invalid. Please check the fields.');
+      this.sharedService.showAlert('Form is invalid. Please check the fields.', 'error');
     }
   }
 }

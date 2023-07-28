@@ -21,9 +21,7 @@ export class CountryListComponent implements OnInit {
   constructor(
     private sharedService: SharedService,
     private router: Router,
-    private authService: AuthService
   ) {
-
     this.sharedService.getCounties().subscribe((res) => {
       this.dataSource = res;
     })
@@ -34,23 +32,10 @@ export class CountryListComponent implements OnInit {
   }
 
   addCountry() {
-    this.authService.hasRouteAccess(this.userId, 'country/add').subscribe((res) => {
-      this.hasAccessToAdd = res;
-      if (res === true) {
-        this.router.navigate([`country/add`]);
-      } else {
-        this.router.navigateByUrl('**');
-      }
-    })
+    this.router.navigate([`country/add`]);
   }
+
   editCountry(countryId: number) {
-    this.authService.hasRouteAccess(this.userId, 'country/edit').subscribe((res) => {
-      this.hasAccessToEdit = res;
-      if (res === true) {
-        this.router.navigate([`country/edit/${countryId}`]);
-      } else {
-        this.router.navigateByUrl('**');
-      }
-    })
+    this.router.navigate([`country/edit/${countryId}`]);
   }
 }

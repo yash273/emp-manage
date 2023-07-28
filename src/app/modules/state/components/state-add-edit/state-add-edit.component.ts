@@ -57,7 +57,11 @@ export class StateAddEditComponent implements OnInit {
         this.prevData = res;
         this.stateForm.get('countryId')?.disable();
         this.stateForm.patchValue(this.prevData);
-      })
+      },
+        (err) => {
+          this.router.navigate(['**']);
+        }
+      );
     }
   }
 
@@ -67,14 +71,14 @@ export class StateAddEditComponent implements OnInit {
 
       this.stateService.addState(formData).subscribe((res) => {
         if (res) {
-          console.log('Added');
+          this.sharedService.showAlert("State Added Successfully!", "success");
         } else {
-          console.log('Something went wrong');
+          this.sharedService.showAlert("Oops! Something Went Wrong!", 'default');
         }
       });
       this.router.navigate(['/dashboard'])
     } else {
-      console.log('Form is invalid. Please check the fields.');
+      this.sharedService.showAlert('Form is invalid. Please check the fields.', 'error');
     }
   }
 
@@ -86,15 +90,15 @@ export class StateAddEditComponent implements OnInit {
 
         this.stateService.updateState(formData, this.stateId).subscribe((res) => {
           if (res) {
-            console.log('Added');
+            this.sharedService.showAlert("State Updated Successfully!", "success");
           } else {
-            console.log('Something went wrong');
+            this.sharedService.showAlert("Oops! Something Went Wrong!", 'default');
           }
         });
       }
       this.router.navigate(['/dashboard'])
     } else {
-      console.log('Form is invalid. Please check the fields.');
+      this.sharedService.showAlert('Form is invalid. Please check the fields.', 'error');
     }
   }
 

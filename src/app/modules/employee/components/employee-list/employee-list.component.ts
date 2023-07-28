@@ -22,7 +22,6 @@ export class EmployeeListComponent implements OnInit {
     private employeeService: EmployeeService,
     private router: Router,
     private sharedService: SharedService,
-    private authService: AuthService
   ) {
     this.employeeService.getEmployees().subscribe((res) => {
       this.dataSource = res;
@@ -34,26 +33,11 @@ export class EmployeeListComponent implements OnInit {
   }
 
   editEmployee(empId: number) {
-    this.authService.hasRouteAccess(this.userId, 'employee/edit').subscribe((res) => {
-      this.hasAccessToEdit = res;
-      if (res === true) {
-        this.router.navigate([`employee/edit/${empId}`]);
-      } else {
-        this.router.navigateByUrl('**');
-      }
-    })
+    this.router.navigate([`employee/edit/${empId}`]);
   }
 
   addEmployee() {
-    this.authService.hasRouteAccess(this.userId, 'employee/add').subscribe((res) => {
-      this.hasAccessToAdd = res;
-      if (res === true) {
-        this.router.navigate([`employee/add`]);
-      } else {
-        this.router.navigateByUrl('**');
-      }
-    })
+    this.router.navigate([`employee/add`]);
   }
-
 
 }
