@@ -45,7 +45,6 @@ export class CountryAddEditComponent implements OnInit {
   }
 
   addCountry() {
-    console.log(this.countryForm)
 
     if (this.countryForm.valid) {
       const formData = { ...this.countryForm.value };
@@ -75,7 +74,6 @@ export class CountryAddEditComponent implements OnInit {
       });
       this.router.navigate(['/dashboard'])
     } else {
-      console.log(this.countryId)
       console.log('Form is invalid. Please check the fields.');
     }
   }

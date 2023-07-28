@@ -62,7 +62,6 @@ export class StateAddEditComponent implements OnInit {
   }
 
   addState() {
-    console.log(this.stateForm.value)
     if (this.stateForm.valid) {
       const formData = { ...this.stateForm.value };
 
@@ -80,7 +79,6 @@ export class StateAddEditComponent implements OnInit {
   }
 
   editState() {
-    console.log(this.stateForm.value)
     if (this.stateForm.valid) {
       this.stateForm.get('countryId')?.enable();
       const formData = { ...this.stateForm.value };

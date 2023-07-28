@@ -41,8 +41,7 @@ export class LoginComponent implements OnInit {
         const user = res.find((a: any) => {
           const storedHashedPassword = a.password;
           const isPasswordValid = this.encryptDecryptService.comparePasswords(this.loginForm.value.password, storedHashedPassword);
-          return a.email === this.loginForm.value.email
-            && isPasswordValid
+          return a.email === this.loginForm.value.email && isPasswordValid;
         });
         if (user) {
           console.log('you are successfully login');

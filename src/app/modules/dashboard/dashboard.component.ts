@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
 
   logout() {
     this.sharedService.removeLoggedUser();
-    this.router.navigate(['/auth/login'])
+    this.router.navigate(['/login'])
   }
 
 
@@ -53,11 +53,10 @@ export class DashboardComponent implements OnInit {
   }
 
   getUserRoutes() {
-    // console.log(x)
     this.authService.getUserData(this.userId).subscribe((res) => {
       this.currentUser = res;
       if (res && res.route_rights) {
-        this.filteredRoutes = this.routes.filter((route) => res.route_rights.includes(route.id));
+        this.filteredRoutes = this.routes.filter((route) => res.route_rights.includes(route.id) && route.route !== 'dashboard');
         this.change()
       }
     })

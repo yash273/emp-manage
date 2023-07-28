@@ -60,7 +60,6 @@ export class CityAddEditComponent implements OnInit {
   }
 
   addCity() {
-    console.log(this.cityForm.value)
     if (this.cityForm.valid) {
       const formData = { ...this.cityForm.value };
 
@@ -78,7 +77,6 @@ export class CityAddEditComponent implements OnInit {
   }
 
   editState() {
-    console.log(this.cityForm.value)
     if (this.cityForm.valid) {
       this.cityForm.get('stateId')?.enable();
       const formData = { ...this.cityForm.value };

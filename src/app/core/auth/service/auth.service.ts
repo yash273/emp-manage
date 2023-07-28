@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, forkJoin, map } from 'rxjs';
 import { Route, User } from '../interface/user';
 import { environment } from 'src/environments/environment';
 
@@ -48,8 +48,13 @@ export class AuthService {
       map((userData) => {
         this.routes = userData.route_rights;
         const matchingRoute = this.routes.find((r) => r === this.routeId);
-        return !!matchingRoute;
+        if (matchingRoute !== undefined) {
+          return true;
+        } else {
+          return false
+        }
       })
     );
   }
+
 }
