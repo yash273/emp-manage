@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/app/core/auth/interface/user';
 import { SharedService } from 'src/shared/service/shared.service';
 import { CountryService } from '../../service/country.service';
 import { AuthService } from 'src/app/core/auth/service/auth.service';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-country-list',
@@ -12,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class CountryListComponent implements OnInit {
 
-  dataSource !: any;
+  dataSource = new MatTableDataSource();
   displayedColumns: string[] = ['id', 'name', 'action'];
   userId: any;
   hasAccessToEdit: boolean = false;
@@ -22,8 +24,8 @@ export class CountryListComponent implements OnInit {
     private sharedService: SharedService,
     private router: Router,
   ) {
-    this.sharedService.getCounties().subscribe((res) => {
-      this.dataSource = res;
+    this.sharedService.getCounties().subscribe((res : any) => {
+      this.dataSource.data = res;
     })
   }
 

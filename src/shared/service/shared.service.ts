@@ -45,7 +45,7 @@ export class SharedService {
       data: {
         message: message,
       },
-      duration: 3000,
+      duration: 4000,
       horizontalPosition: 'right',
       verticalPosition: 'top',
       panelClass: alertType

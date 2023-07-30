@@ -6,6 +6,7 @@ import { InfoComponent } from './components/info/info.component';
 import { DashboardComponent } from './dashboard.component';
 import { MaterialModule } from 'src/shared/material/material.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -17,7 +18,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     CommonModule,
     DashboardRoutingModule,
     MaterialModule,
-    NgxChartsModule
+    NgxChartsModule,
+    NgxSpinnerModule
+
   ]
 })
 export class DashboardModule { }

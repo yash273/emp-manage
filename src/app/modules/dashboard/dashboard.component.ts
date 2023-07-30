@@ -42,6 +42,7 @@ export class DashboardComponent implements OnInit {
 
   logout() {
     this.sharedService.removeLoggedUser();
+    this.sharedService.showAlert('logout completed',"default")
     this.router.navigate(['/login']);
   }
 

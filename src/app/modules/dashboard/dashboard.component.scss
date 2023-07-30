@@ -1,6 +1,7 @@
 .side-container{display: flex;flex-direction: column;min-height: 100vh;
     .top-container{display: flex;position: sticky;top: 0;right: 0;z-index: 1000;}}
 p{margin: 0 0 0 0;}
+.top-container{display: flex;position: sticky;top: 0;right: 0;z-index: 1000;}
 .lower-container{display: flex;justify-content: center;align-items: center;}
 .sidenav{width: 100%;max-width: 240px;}
 .example-spacer {flex: 1 1 auto;}

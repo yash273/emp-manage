@@ -6,6 +6,8 @@ import { canActivateGuard} from './helpers/can-activate.guard';
 const routes: Routes = [
   {
     path: '',
+    canActivate: [canActivateGuard],
+
     loadChildren: () =>
       import('./core/auth/auth.module').then((m) => m.AuthModule),
   },
