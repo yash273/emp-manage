@@ -18,33 +18,42 @@ export const canActivateGuard: CanActivateFn = (route, state) => {
   } else {
     currentRoute = state.url.slice(1);
   }
-
   if (!isUserLoggedIn) {
     router.navigate(['/login']);
     return false;
   }
-  else if (isUserLoggedIn && currentRoute !== 'login' && currentRoute !== 'signup' && currentRoute !== '') {
-    const userId = parseInt(isUserLoggedIn, 10);
-    return authService.hasRouteAccess(userId, currentRoute).pipe(
-      map(hasAccess => {
-        if (hasAccess) {
-          console.log("hi")
-          return true;
-        } else {
-          sharedService.showAlert("Looks like You are not Authorize to Access this page!", "error");
-          router.navigate(['/dashboard']);
-          return false;
-        }
-      })
-    );
+  else {
+    if(currentRoute !== 'login' && currentRoute !== 'signup' && currentRoute !== ''){
+      const userId = parseInt(isUserLoggedIn, 10);
+      return authService.hasRouteAccess(userId, currentRoute).pipe(
+        map(hasAccess => {
+          if (hasAccess) {
+            return true;
+          } else {
+            // sharedService.showAlert("Looks like You are not Authorize to Access this page!", "error");
+            router.navigate(['/dashboard']);
+            return false;
+          }
+        })
+      );
+    }
+    else  {
+      router.navigate(['/dashboard']);
+      return true;
+    }
   }
-  else if (isUserLoggedIn) {
-    router.navigate(['/dashboard']);
-    return true;
-  } else {
-    sharedService.showAlert("Oops! Something Went Wrong!", 'default');
-    router.navigate(['/login']);
-    return true;
-  }
-
 };
+
+// export const canActivateGuardLogin: CanActivateFn = (route, state) => {
+//   const router = inject(Router);
+//   const isUserLoggedIn = localStorage.getItem('loggedUserId');
+
+//   if (!isUserLoggedIn) {
+//     router.navigate(['/login']);
+//     return true;
+//   }
+//   else {
+//     router.navigate(['/dashboard']);
+//     return false;
+//   }
+// };

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from 'src/shared/components/page-not-found/page-not-found.component';
-import { canActivateGuard } from './helpers/can-activate.guard';
+import { canActivateGuard} from './helpers/can-activate.guard';
 
 const routes: Routes = [
   {

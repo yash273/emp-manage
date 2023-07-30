@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Route, User } from 'src/app/core/auth/interface/user';
 import { AuthService } from 'src/app/core/auth/service/auth.service';
 import { email, mob, name, pass } from 'src/shared/regex-rules/regex-rule';
 import { EncryptDecryptService } from 'src/shared/service/encrypt-decrypt.service';
@@ -64,6 +63,7 @@ export class EmployeeAddEditComponent {
 
   populateForm() {
     this.authService.getUserData(this.userId).subscribe((res) => {
+      console.log(res);
       const { password, ...previousData } = res;
       previousData.role = res.role.toString();
       this.userForm.removeControl('confirm_password');

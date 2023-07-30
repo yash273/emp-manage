@@ -1,0 +1,646 @@
+{
+  "users": [
+    {
+      "first_name": "demoChange",
+      "last_name": "demo",
+      "email": "demo@mail.com",
+      "mobile": 9955668822,
+      "role": 2,
+      "password": "$2a$08$L0Ilhz.6lHl9kDgb.CPxyO1BqY4BzHxzhVzvajboVhW4pw0TwtlqO",
+      "country": 2,
+      "state": 5,
+      "city": 11,
+      "route_rights": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "id": 4
+    },
+    {
+      "first_name": "adminNew",
+      "last_name": "lastname",
+      "email": "admin@mail.com",
+      "mobile": 9876543215,
+      "role": 1,
+      "password": "$2a$08$0FQoD5dEbC4ZgTHUFsD7A.Onu68s6xGKZeLC4Uht3pwztwcs276yK",
+      "country": 1,
+      "state": 1,
+      "city": 1,
+      "route_rights": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "id": 5
+    },
+    {
+      "first_name": "employee",
+      "last_name": "ofcompany",
+      "email": "employee@mail.com",
+      "mobile": 5444477855,
+      "role": 2,
+      "password": "$2a$08$qH0SMdJxtYisjZyHfSM09.RlVaRKgN.pjV2w/6WoLKZ07H35dZmtC",
+      "country": 1,
+      "state": 2,
+      "city": 5,
+      "route_rights": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "id": 6
+    },
+    {
+      "first_name": "added",
+      "last_name": "user",
+      "email": "addedemp123@mail.com",
+      "mobile": 9876545522,
+      "role": 2,
+      "password": "$2a$08$IGMW7fbj7Wfl/KmG74ejOuTp1mEH1wkw11xI3qng9DCxv7aCwNvS6",
+      "country": 3,
+      "state": 9,
+      "city": 15,
+      "route_rights": [
+        1,
+        4,
+        7,
+        8
+      ],
+      "id": 7
+    },
+    {
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john.doe@mail.com",
+      "mobile": 5555555555,
+      "role": 1,
+      "password": "$2a$08$FZ4fWfn6yF4ZItkX.jhAUO4KNkEunwZ6eIlCT7J1P50yYhBV0URX6",
+      "country": 4,
+      "state": 10,
+      "city": 16,
+      "route_rights": [
+        1,
+        3,
+        5,
+        7,
+        8
+      ],
+      "id": 8
+    },
+    {
+      "first_name": "William",
+      "last_name": "Lee",
+      "email": "william.lee@mail.com",
+      "mobile": 9999999999,
+      "role": 1,
+      "password": "$2a$08$RKKfAMo2UhXjHn4Vy9NPK.zDg9ewJbA1m3brjTmGmC44AbNT1fxrG",
+      "country": 3,
+      "state": 9,
+      "city": 15,
+      "route_rights": [
+        1,
+        2,
+        5,
+        8,
+        9
+      ],
+      "id": 9
+    },
+    {
+      "first_name": "Emily",
+      "last_name": "Brown",
+      "email": "emily.brown@mail.com",
+      "mobile": 8888888888,
+      "role": 2,
+      "password": "$2a$08$4TR5kZ8lx22PQkaAABDXQOpdqXEmr3jGpxMR0KnI7VtPPKfI3j3Ju",
+      "country": 2,
+      "state": 6,
+      "city": 12,
+      "route_rights": [
+        1,
+        4,
+        7,
+        8,
+        9,
+        10
+      ],
+      "id": 10
+    },
+    {
+      "first_name": "Michael",
+      "last_name": "Johnson",
+      "email": "michael.johnson@mail.com",
+      "mobile": 7777777777,
+      "role": 1,
+      "password": "$2a$08$IadWsoFwWnGLTD/sTl39d.IluZ1f1G8g7xz1v0LGZWb9lZ6p3Y.H6",
+      "country": 4,
+      "state": 10,
+      "city": 17,
+      "route_rights": [
+        1,
+        2,
+        3
+      ],
+      "id": 11
+    },
+    {
+      "first_name": "Jane",
+      "last_name": "Smith",
+      "email": "jane.smith@mail.com",
+      "mobile": 6666666666,
+      "role": 2,
+      "password": "$2a$08$rnztwgAFHJljQVLeBtjF8.SQOLxL67ntHw0IiL4QxAcXeeFyz8smC",
+      "country": 3,
+      "state": 8,
+      "city": 14,
+      "route_rights": [
+        1,
+        2,
+        4,
+        6,
+        8,
+        9
+      ],
+      "id": 12
+    },
+    {
+      "first_name": "Sophia",
+      "last_name": "Martin",
+      "email": "sophia.martin@mail.com",
+      "mobile": 1111111111,
+      "role": 2,
+      "password": "$2a$08$zvcTJe0iCnEAdWe89DKAa.6frzvVg2df7rS0XveByG49yDW7ErDwS",
+      "country": 1,
+      "state": 2,
+      "city": 6,
+      "route_rights": [
+        1,
+        2,
+        3,
+        7,
+        9
+      ],
+      "id": 13
+    },
+    {
+      "first_name": "Daniel",
+      "last_name": "Wilson",
+      "email": "daniel.wilson@mail.com",
+      "mobile": 2222222222,
+      "role": 1,
+      "password": "$2a$08$fAujoNQ2d9.v.Tc4HHZKn.BWVCsqP42hqBRDDvnUzftdWhNY9UmPm",
+      "country": 2,
+      "state": 4,
+      "city": 10,
+      "route_rights": [
+        1,
+        2,
+        4,
+        6,
+        8
+      ],
+      "id": 14
+    },
+    {
+      "first_name": "Olivia",
+      "last_name": "Thompson",
+      "email": "olivia.thompson@mail.com",
+      "mobile": 3333333333,
+      "role": 2,
+      "password": "$2a$08$6B7X8EmYCr.gdybNTf/tUuWfifn8Jvp3kEeWYr0ak1p8flX1AomMm",
+      "country": 3,
+      "state": 7,
+      "city": 13,
+      "route_rights": [
+        1,
+        2,
+        5,
+        7,
+        9
+      ],
+      "id": 15
+    },
+    {
+      "first_name": "James",
+      "last_name": "Anderson",
+      "email": "james.anderson@mail.com",
+      "mobile": 4444444444,
+      "role": 1,
+      "password": "$2a$08$ZqQu1yUTaQj3Ez4BBayc7.51Hdf0MG6xQFzGnERmG4iD8u0FrMEt2",
+      "country": 1,
+      "state": 1,
+      "city": 1,
+      "route_rights": [
+        1,
+        2,
+        4,
+        6
+      ],
+      "id": 16
+    },
+    {
+      "first_name": "Amelia",
+      "last_name": "Perez",
+      "email": "amelia.perez@mail.com",
+      "mobile": 5555555555,
+      "role": 2,
+      "password": "$2a$08$PAzTqWQuz82G4tHcEZMG0uAar10D/jhCEm9XYk9lD6NtvDrcUZp4O",
+      "country": 2,
+      "state": 5,
+      "city": 11,
+      "route_rights": [
+        1,
+        2,
+        3,
+        8,
+        9
+      ],
+      "id": 17
+    },
+    {
+      "first_name": "Liam",
+      "last_name": "Hernandez",
+      "email": "liam.hernandez@mail.com",
+      "mobile": 6666666666,
+      "role": 1,
+      "password": "$2a$08$AT7B3G7KzT2/6qJmjTT./eHJU..St1lvvz4Wzq1gACiNQ8GJ6nmcO",
+      "country": 1,
+      "state": 1,
+      "city": 1,
+      "route_rights": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "id": 18
+    },
+    {
+      "first_name": "Ava",
+      "last_name": "Ramirez",
+      "email": "ava.ramirez@mail.com",
+      "mobile": 7777777777,
+      "role": 2,
+      "password": "$2a$08$uM/iTeZkSPd/8/IfyB1zCunR0ivB7vbCX4K38VwiaIf5PdywOCGiC",
+      "country": 4,
+      "state": 10,
+      "city": 16,
+      "route_rights": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "id": 19
+    },
+    {
+      "first_name": "Noah",
+      "last_name": "Gomez",
+      "email": "noah.gomez@mail.com",
+      "mobile": 8888888888,
+      "role": 1,
+      "password": "$2a$08$1Ru7zMOpSt/b0tnSL.Xc/.z.7bHaEFt/Aw8wf5PHbkSVgWfnc1PRK",
+      "country": 4,
+      "state": 10,
+      "city": 16,
+      "route_rights": [
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        10
+      ],
+      "id": 20
+    },
+    {
+      "first_name": "Isabella",
+      "last_name": "Sanchez",
+      "email": "isabella.sanchez@mail.com",
+      "mobile": 9999999999,
+      "role": 2,
+      "password": "$2a$08$ka4deAhocP/AeNdh58pJgOUjb7yI.eeg25AAAAaBtPhEDFqEw2qea",
+      "country": 4,
+      "state": 10,
+      "city": 17,
+      "route_rights": [
+        1,
+        2,
+        4,
+        5,
+        7,
+        8
+      ],
+      "id": 21
+    },
+    {
+      "first_name": "new",
+      "last_name": "test",
+      "email": "test@mail.com",
+      "mobile": 8855885858,
+      "role": 2,
+      "password": "$2a$08$EFNP3Hjj64z5njQ8u141re3LBbFMEZg60aZZTwBoWc4LfXmE009T6",
+      "country": 4,
+      "state": 10,
+      "city": 16,
+      "route_rights": [
+        1,
+        2,
+        5,
+        8,
+        11
+      ],
+      "id": 22
+    },
+    {
+      "first_name": "testemp",
+      "last_name": "emp",
+      "email": "testemp@mail.com",
+      "mobile": 1234567890,
+      "role": 2,
+      "password": "$2a$08$fePBC/NEXqNEW61s5zSrM.RgwOdSJ1bHQZhw6sirYmT1oAwgAi/vW",
+      "country": 4,
+      "state": 10,
+      "city": 19,
+      "route_rights": [
+        1,
+        2,
+        3
+      ],
+      "id": 23
+    }
+  ],
+  "routes": [
+    {
+      "id": 1,
+      "route": "dashboard"
+    },
+    {
+      "id": 2,
+      "route": "country"
+    },
+    {
+      "id": 3,
+      "route": "country/add"
+    },
+    {
+      "id": 4,
+      "route": "country/edit"
+    },
+    {
+      "id": 5,
+      "route": "state"
+    },
+    {
+      "id": 6,
+      "route": "state/add"
+    },
+    {
+      "id": 7,
+      "route": "state/edit"
+    },
+    {
+      "id": 8,
+      "route": "city"
+    },
+    {
+      "id": 9,
+      "route": "city/add"
+    },
+    {
+      "id": 10,
+      "route": "city/edit"
+    },
+    {
+      "id": 11,
+      "route": "employee"
+    },
+    {
+      "id": 12,
+      "route": "employee/add"
+    },
+    {
+      "id": 13,
+      "route": "employee/edit"
+    }
+  ],
+  "countries": [
+    {
+      "name": "United States",
+      "id": 1
+    },
+    {
+      "name": "Canada",
+      "id": 2
+    },
+    {
+      "name": "Australia",
+      "id": 3
+    },
+    {
+      "name": "India",
+      "id": 4
+    },
+    {
+      "name": "China",
+      "id": 5
+    },
+    {
+      "name": "Pakistan",
+      "id": 6
+    },
+    {
+      "name": "Russia",
+      "id": 7
+    },
+    {
+      "name": "Maxico",
+      "id": 8
+    }
+  ],
+  "states": [
+    {
+      "name": "California",
+      "id": 1,
+      "countryId": 1
+    },
+    {
+      "name": "Texas",
+      "id": 2,
+      "countryId": 1
+    },
+    {
+      "name": "New York",
+      "id": 3,
+      "countryId": 1
+    },
+    {
+      "name": "Ontario",
+      "id": 4,
+      "countryId": 2
+    },
+    {
+      "name": "British Columbia",
+      "id": 5,
+      "countryId": 2
+    },
+    {
+      "name": "Quebec",
+      "id": 6,
+      "countryId": 2
+    },
+    {
+      "name": "New South Wales",
+      "id": 7,
+      "countryId": 3
+    },
+    {
+      "name": "Victoria",
+      "id": 8,
+      "countryId": 3
+    },
+    {
+      "countryId": 3,
+      "name": "Queensland",
+      "id": 9
+    },
+    {
+      "countryId": 4,
+      "name": "Gujarat",
+      "id": 10
+    },
+    {
+      "countryId": 7,
+      "name": "Chechen Republic",
+      "id": 11
+    }
+  ],
+  "cities": [
+    {
+      "name": "Los Angeles",
+      "id": 1,
+      "stateId": 1
+    },
+    {
+      "name": "San Francisco",
+      "id": 2,
+      "stateId": 1
+    },
+    {
+      "name": "San Diego",
+      "id": 3,
+      "stateId": 1
+    },
+    {
+      "name": "Houston",
+      "id": 4,
+      "stateId": 2
+    },
+    {
+      "name": "Austin",
+      "id": 5,
+      "stateId": 2
+    },
+    {
+      "name": "Dallas",
+      "id": 6,
+      "stateId": 2
+    },
+    {
+      "name": "New York City",
+      "id": 7,
+      "stateId": 3
+    },
+    {
+      "name": "Buffalo",
+      "stateId": 3,
+      "id": 8
+    },
+    {
+      "name": "Albany",
+      "id": 9,
+      "stateId": 3
+    },
+    {
+      "name": "Toronto",
+      "id": 10,
+      "stateId": 4
+    },
+    {
+      "name": "Vancouver",
+      "id": 11,
+      "stateId": 5
+    },
+    {
+      "name": "Montreal",
+      "id": 12,
+      "stateId": 6
+    },
+    {
+      "name": "Sydney",
+      "id": 13,
+      "stateId": 7
+    },
+    {
+      "name": "Melbourne",
+      "id": 14,
+      "stateId": 8
+    },
+    {
+      "name": "Brisbane",
+      "id": 15,
+      "stateId": 9
+    },
+    {
+      "name": "Rajkot",
+      "stateId": 10,
+      "id": 16
+    },
+    {
+      "name": "Surat",
+      "stateId": 10,
+      "id": 17
+    },
+    {
+      "name": "Grozny",
+      "stateId": 11,
+      "id": 18
+    },
+    {
+      "name": "Vadodara",
+      "stateId": 10,
+      "id": 19
+    }
+  ]
+}
