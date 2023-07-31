@@ -21,6 +21,62 @@ export class EmployeeAddEditComponent {
   userId!: number;
   previousData!: any;
   routes!: any;
+  initialRoutes: { [key: number]: boolean } = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false, 10: false, 11: false, 12: false };
+
+  r = [
+    {
+      "route": "dashboard",
+      "value": false
+    },
+    {
+      "value": false,
+      "route": "country"
+    },
+    {
+      "value": false,
+      "route": "country/add"
+    },
+    {
+      "value": false,
+      "route": "country/edit"
+    },
+    {
+      "value": false,
+      "route": "state"
+    },
+    {
+      "value": false,
+      "route": "state/add"
+    },
+    {
+      "value": false,
+      "route": "state/edit"
+    },
+    {
+      "value": false,
+      "route": "city"
+    },
+    {
+      "value": false,
+      "route": "city/add"
+    },
+    {
+      "value": false,
+      "route": "city/edit"
+    },
+    {
+      "value": false,
+      "route": "employee"
+    },
+    {
+      "value": false,
+      "route": "employee/add"
+    },
+    {
+      "value": false,
+      "route": "employee/edit"
+    }
+  ]
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,11 +86,12 @@ export class EmployeeAddEditComponent {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.getAllRoutes()
   }
 
   ngOnInit(): void {
     this.initializeForm();
+    this.getAllRoutes()
+
     this.getCountries();
     this.userId = this.route.snapshot.params['id'];
     if (this.userId) {
@@ -64,6 +121,16 @@ export class EmployeeAddEditComponent {
   populateForm() {
     this.authService.getUserData(this.userId).subscribe((res) => {
       console.log(res);
+      const userRoutes = res.route_rights;
+
+      console.log(userRoutes)
+      userRoutes.forEach((key) => {
+        if (this.initialRoutes.hasOwnProperty(key)) {
+          this.initialRoutes[key] = true;
+        }
+      });
+      // console.log(this.initialRoutes);
+      this.initialRoutes;
       const { password, ...previousData } = res;
       previousData.role = res.role.toString();
       this.userForm.removeControl('confirm_password');
@@ -75,6 +142,19 @@ export class EmployeeAddEditComponent {
         this.router.navigate(['**']);
       }
     );
+  }
+
+  getAllRoutes() {
+    this.authService.getRoutes().subscribe((res) => {
+      res.forEach((element) => {
+        element.id = element.id.toString();
+      })
+      this.routes = res;
+      const checkboxes = <FormGroup>this.userForm.get('route_rights');
+      this.routes.forEach((option: any) => {
+        checkboxes.addControl(option.id, new FormControl(false));
+      });
+    });
   }
 
   passwordMatchValidator(form: FormGroup) {
@@ -91,9 +171,12 @@ export class EmployeeAddEditComponent {
 
   addUser() {
     const routeRights = this.userForm.value.route_rights;
+    console.log(routeRights)
     const trueRoutes = Object.keys(routeRights)
       .filter((key) => routeRights[Number(key)])
       .map(Number);
+
+    console.log(trueRoutes)
 
     if (this.userForm.valid) {
       const formData = { ...this.userForm.value };
@@ -120,9 +203,12 @@ export class EmployeeAddEditComponent {
 
   EditUser() {
     const routeRights = this.userForm.value.route_rights;
+    console.log(routeRights)
     const trueRoutes = Object.keys(routeRights)
       .filter((key) => routeRights[Number(key)])
       .map(Number);
+
+    console.log(trueRoutes)
 
     if (this.userForm.valid) {
       const formData = { ...this.userForm.value };
@@ -179,17 +265,6 @@ export class EmployeeAddEditComponent {
     }
   }
 
-  getAllRoutes() {
-    this.authService.getRoutes().subscribe((res) => {
-      res.forEach((element) => {
-        element.id = element.id.toString();
-      })
-      this.routes = res;
-      const checkboxes = <FormGroup>this.userForm.get('route_rights');
-      this.routes.forEach((option: any) => {
-        checkboxes.addControl(option.id, new FormControl(false));
-      });
-    });
-  }
+
 
 }
