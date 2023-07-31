@@ -20,6 +20,7 @@ export const canActivateGuard: CanActivateFn = (route, state) => {
   }
 
   if (isUserLoggedIn) {
+    console.log("guard call")
     if (currentRoute === 'login' || currentRoute === 'signup' || currentRoute === '') {
       sharedService.showAlert("Looks like You are not Authorize to Access this page!", "error");
       router.navigate(['/dashboard']);

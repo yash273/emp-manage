@@ -26,6 +26,8 @@ export class CityListComponent implements OnInit {
     private router: Router,
     private authService: AuthService
   ) {
+    console.log("const call")
+
     this.stateService.getStates().subscribe((res) => {
       this.states = res;
     });
