@@ -22,6 +22,7 @@ export class EmployeeListComponent implements OnInit {
     private employeeService: EmployeeService,
     private router: Router,
     private sharedService: SharedService,
+    private authService: AuthService
   ) {
     this.employeeService.getEmployees().subscribe((res) => {
       this.dataSource = res;
@@ -30,6 +31,13 @@ export class EmployeeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.sharedService.getUserFromLocal();
+    this.authService.hasRouteAccess(this.userId, 'employee/add').subscribe((res) => {
+      this.hasAccessToAdd = res;
+    });
+    this.authService.hasRouteAccess(this.userId, 'employee/edit').subscribe((res) => {
+      this.hasAccessToEdit = res;
+    })
+
   }
 
   editEmployee(empId: number) {

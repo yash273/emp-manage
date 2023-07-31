@@ -7,17 +7,14 @@ import { canActivateGuard } from 'src/app/helpers/can-activate.guard';
 const routes: Routes = [
   {
     path: '',
-    // canActivate: [canActivateGuard],
     component: LoginComponent,
   },
   {
     path: 'login',
-    // canActivate: [canActivateGuard],
     component: LoginComponent,
   },
   {
     path: 'signup',
-    // canActivate: [canActivateGuard],
     component: SignupComponent
   }
 ];

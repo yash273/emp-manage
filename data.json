@@ -6,15 +6,15 @@
       "email": "demo@mail.com",
       "mobile": 9955668822,
       "role": 2,
-      "password": "$2a$08$L0Ilhz.6lHl9kDgb.CPxyO1BqY4BzHxzhVzvajboVhW4pw0TwtlqO",
+      "password": "$2a$08$EBzJwnF4a8ZfW8KsxNwtR.PVm9IlsJH2JXkqlaW/JJrT6cfXmXPYK",
       "country": 2,
       "state": 5,
       "city": 11,
       "route_rights": [
         1,
-        2,
-        3,
-        4
+        4,
+        7,
+        10
       ],
       "id": 4
     },
@@ -40,8 +40,7 @@
         9,
         10,
         11,
-        12,
-        13
+        12
       ],
       "id": 5
     },
@@ -394,64 +393,145 @@
       "state": 10,
       "city": 19,
       "route_rights": [
-        1,
         2,
         3
       ],
       "id": 23
+    },
+    {
+      "first_name": "d",
+      "last_name": "d",
+      "email": "mail@mail.com",
+      "mobile": 987899898,
+      "role": 2,
+      "password": "$2a$08$r88jJLUsZ3ryZoRo28.Uhucgspfv9UpQeS5/ULkzHQah717bFenDi",
+      "country": 1,
+      "state": 1,
+      "city": 2,
+      "route_rights": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "id": 24
+    },
+    {
+      "first_name": "testuser",
+      "last_name": "test",
+      "email": "testuser@mail.com",
+      "mobile": 7986543215,
+      "role": 2,
+      "password": "$2a$08$RV33iyB0O7m0/Hjfx.y.IeL7o1OOhvu/imhnuINa5bvctK4lI3Ldy",
+      "country": 4,
+      "state": 10,
+      "city": 16,
+      "route_rights":[
+    {
+      "value": true,
+      "route": "country"
+    },
+    {
+      "value": false,
+      "route": "country/add"
+    },
+    {
+      "value": false,
+      "route": "country/edit"
+    },
+    {
+      "value": true,
+      "route": "state"
+    },
+    {
+      "value": false,
+      "route": "state/add"
+    },
+    {
+      "value": false,
+      "route": "state/edit"
+    },
+    {
+      "value": true,
+      "route": "city"
+    },
+    {
+      "value": false,
+      "route": "city/add"
+    },
+    {
+      "value": false,
+      "route": "city/edit"
+    },
+    {
+      "value": false,
+      "route": "employee"
+    },
+    {
+      "value": false,
+      "route": "employee/add"
+    },
+    {
+      "value": false,
+      "route": "employee/edit"
+    }
+  ],
+      "id": 25
     }
   ],
   "routes": [
     {
       "id": 1,
-      "route": "dashboard"
-    },
-    {
-      "id": 2,
       "route": "country"
     },
     {
-      "id": 3,
+      "id": 2,
       "route": "country/add"
     },
     {
-      "id": 4,
+      "id": 3,
       "route": "country/edit"
     },
     {
-      "id": 5,
+      "id": 4,
       "route": "state"
     },
     {
-      "id": 6,
+      "id": 5,
       "route": "state/add"
     },
     {
-      "id": 7,
+      "id": 6,
       "route": "state/edit"
     },
     {
-      "id": 8,
+      "id": 7,
       "route": "city"
     },
     {
-      "id": 9,
+      "id": 8,
       "route": "city/add"
     },
     {
-      "id": 10,
+      "id": 9,
       "route": "city/edit"
     },
     {
-      "id": 11,
+      "id": 10,
       "route": "employee"
     },
     {
-      "id": 12,
+      "id": 11,
       "route": "employee/add"
     },
     {
-      "id": 13,
+      "id": 12,
       "route": "employee/edit"
     }
   ],

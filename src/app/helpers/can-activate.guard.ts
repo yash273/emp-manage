@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../core/auth/service/auth.service';
-import { catchError, map, of } from 'rxjs';
+import { catchError, map, of, switchMap } from 'rxjs';
 import { SharedService } from 'src/shared/service/shared.service';
 
 export const canActivateGuard: CanActivateFn = (route, state) => {
@@ -18,79 +18,39 @@ export const canActivateGuard: CanActivateFn = (route, state) => {
   } else {
     currentRoute = state.url.slice(1);
   }
-    // if (isUserLoggedIn) {
-    //   if (currentRoute === 'login' || currentRoute === 'signup' || currentRoute === '') {
-    //     router.navigate(['/dashboard']); 
-    //   return false;
-    //   } 
-    //   if (currentRoute !== 'login' && currentRoute !== 'signup' && currentRoute !== '') {
-    //     const userId = parseInt(isUserLoggedIn, 10);
-    //     return authService.hasRouteAccess(userId, currentRoute).pipe(
-    //       map(hasAccess => {
-    //         if (hasAccess) {
-    //           return true;
-    //         } else {
-    //           console.log('false else access');
-    //           router.navigate(['/dashboard']);
-    //           return false;
-    //         }
-    //       })
-    //     );
-    //   }else{
-    //     console.log('false else');
-    //     router.navigate(['/dashboard']);
-    //     return false;
-    //   }
-    // }
-    // else {
-    //   console.log('false else else');
-    //   return true;
-    // }
 
-
-  // If user is logged in, protect certain routes, and navigate to dashboard if needed.
   if (isUserLoggedIn) {
     if (currentRoute === 'login' || currentRoute === 'signup' || currentRoute === '') {
+      sharedService.showAlert("Looks like You are not Authorize to Access this page!", "error");
       router.navigate(['/dashboard']);
       return false;
     } else {
+      let x = true;
       const userId = parseInt(isUserLoggedIn, 10);
-      const hasAccess = authService.hasRouteAccess(userId, currentRoute);
-      if (hasAccess) {
-        return true;
-      } else {
-        router.navigate(['/dashboard']);
-        return false;
-      }
+      authService.hasRouteAccess(userId, currentRoute).subscribe((res) => {
+        x = res;
+        if (x === true) {
+          return true;
+        } else {
+          if (currentRoute !== 'dashboard') {
+            sharedService.showAlert("Looks like You are not Authorize to Access this page!", "error");
+            router.navigate(['/dashboard']);
+            return false;
+          } else {
+            router.navigate(['/dashboard']);
+            return false;
+          }
+        }
+      })
+      return x;
     }
   } else {
-    // Allow access to the login page for non-logged-in users
     if (currentRoute === 'login' || currentRoute === 'signup' || currentRoute === '') {
       return true;
     } else {
+      sharedService.showAlert("Looks like You are not Authorize to Access this page!", "error");
       router.navigate(['/login']);
       return false;
     }
   }
 }
-
-
-
-
-
-
-
-
-// export const canActivateGuardLogin: CanActivateFn = (route, state) => {
-//   const router = inject(Router);
-//   const isUserLoggedIn = localStorage.getItem('loggedUserId');
-
-//   if (!isUserLoggedIn) {
-//     router.navigate(['/login']);
-//     return true;
-//   }
-//   else {
-//     router.navigate(['/dashboard']);
-//     return false;
-//   }
-// };

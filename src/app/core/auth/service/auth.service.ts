@@ -42,7 +42,7 @@ export class AuthService {
 
   hasRouteAccess(userId: number, route: string): Observable<boolean> {
     this.getRouteData(route).subscribe((res) => {
-      this.routeId = res[0].id;
+      this.routeId = res[0]?.id;
     });
     return this.getUserData(userId).pipe(
       map((userData) => {

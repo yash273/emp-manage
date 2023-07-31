@@ -14,6 +14,10 @@ interface MenuItem {
   subMenuItems: SubMenuItem[];
 }
 
+interface navLinks {
+
+}
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -42,7 +46,7 @@ export class DashboardComponent implements OnInit {
 
   logout() {
     this.sharedService.removeLoggedUser();
-    this.sharedService.showAlert('logout completed',"default")
+    this.sharedService.showAlert('Successfully Logged out', "success")
     this.router.navigate(['/login']);
   }
 

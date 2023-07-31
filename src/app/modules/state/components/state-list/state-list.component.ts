@@ -32,7 +32,13 @@ export class StateListComponent implements OnInit {
   ngOnInit(): void {
     this.userId = this.sharedService.getUserFromLocal();
     this.stateService.getStates().subscribe((res) => {
-      this.dataSource = res
+      this.dataSource = res;
+    });
+    this.authService.hasRouteAccess(this.userId, 'state/add').subscribe((res) => {
+      this.hasAccessToAdd = res;
+    });
+    this.authService.hasRouteAccess(this.userId, 'state/edit').subscribe((res) => {
+      this.hasAccessToEdit = res;
     })
   }
 

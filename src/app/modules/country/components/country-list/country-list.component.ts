@@ -23,14 +23,21 @@ export class CountryListComponent implements OnInit {
   constructor(
     private sharedService: SharedService,
     private router: Router,
+    private authService: AuthService
   ) {
-    this.sharedService.getCounties().subscribe((res : any) => {
+    this.sharedService.getCounties().subscribe((res: any) => {
       this.dataSource.data = res;
     })
   }
 
   ngOnInit(): void {
     this.userId = this.sharedService.getUserFromLocal();
+    this.authService.hasRouteAccess(this.userId, 'country/add').subscribe((res) => {
+      this.hasAccessToAdd = res;
+    });
+    this.authService.hasRouteAccess(this.userId, 'country/edit').subscribe((res) => {
+      this.hasAccessToEdit = res;
+    })
   }
 
   addCountry() {

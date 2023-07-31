@@ -20,62 +20,21 @@
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="sidenav" mode="side" opened>
 
-        <mat-accordion class="accordion">
-
-            <mat-expansion-panel [expanded]="isLinkActive('/dashboard')" [routerLink]="'/dashboard'" [routerLinkActive]="['active-link']">
-                <mat-expansion-panel-header>
-                    <span class="header-content">
-                        <mat-icon mat-list-icon>dashboard</mat-icon>
-                        <div class="panel-header-label">Dashboard</div>
-                    </span>
-                </mat-expansion-panel-header>
-            </mat-expansion-panel>
-
+        <mat-list>
+            <mat-list-item [routerLinkActive]="['active-link']" [routerLink]="'/dashboard'">
+                <mat-icon matListItemIcon>dashboard</mat-icon>
+                <div matListItemTitle>Dashboard</div>
+            </mat-list-item>
             <ng-container *ngFor="let menuItem of menuItems">
-
-                <mat-expansion-panel [expanded]="false" [routerLinkActive]="['active-link']">
-                    <mat-expansion-panel-header>
-                        <span class="header-content">
-                            <mat-icon mat-list-icon>{{getIconForRoute(menuItem.label)}}</mat-icon>
-                            <div class="panel-header-label">{{ menuItem.label | titlecase}}</div>
-                        </span>
-                    </mat-expansion-panel-header>
-
-                    <mat-nav-list>
-                        <ng-container *ngFor="let subMenuItem of menuItem.subMenuItems">
-                            <mat-list-item [routerLink]="subMenuItem.route" [routerLinkActive]="['active-link']">
-                                <div matLine *ngIf="!subMenuItem.label">{{ menuItem.label }}-list</div>
-                                <div matLine *ngIf="subMenuItem.label">{{ subMenuItem.label }}</div>
-                            </mat-list-item>
-                        </ng-container>
-                    </mat-nav-list>
-
-                </mat-expansion-panel>
+                <mat-list-item [routerLinkActive]="['active-link']" [routerLink]="menuItem.label">
+                    <mat-icon matListItemIcon>{{getIconForRoute(menuItem.label)}}</mat-icon>
+                    <div matListItemTitle>{{ menuItem.label | titlecase}}</div>
+                </mat-list-item>
             </ng-container>
-
-        </mat-accordion>
+        </mat-list>
 
     </mat-drawer>
     <div class="side-container">
-        <!-- <div class="top-container">
-            <mat-toolbar color="primary">
-                <mat-toolbar-row>
-                    <button mat-icon-button (click)="drawer.toggle()" class="example-icon" aria-label="Example icon-button with menu icon">
-                        <mat-icon>menu</mat-icon>
-                    </button>
-                    <span>Dashboard</span>
-
-                    <span class="example-spacer"></span>
-                    <button mat-button [matMenuTriggerFor]="menu">
-                        <span> Hi, {{currentUser?.first_name}}</span>
-                        <mat-icon>keyboard_arrow_down</mat-icon>
-                    </button>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item (click)="logout()">log out</button>
-                    </mat-menu>
-                </mat-toolbar-row>
-            </mat-toolbar>
-        </div> -->
         <div class="lower-container">
             <router-outlet></router-outlet>
         </div>
