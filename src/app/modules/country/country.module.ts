@@ -6,6 +6,9 @@ import { CountryListComponent } from './components/country-list/country-list.com
 import { CountryAddEditComponent } from './components/country-add-edit/country-add-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/shared/material/material.module';
+import { HeaderComponent } from 'src/shared/components/header/header.component';
+import { SidebarComponent } from 'src/shared/components/sidebar/sidebar.component';
+import { SharedModule } from 'src/shared/shared.module';
 
 
 @NgModule({
@@ -13,12 +16,14 @@ import { MaterialModule } from 'src/shared/material/material.module';
     CountryListComponent,
     CountryAddEditComponent
   ],
+
   imports: [
     CommonModule,
     CountryRoutingModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class CountryModule { }

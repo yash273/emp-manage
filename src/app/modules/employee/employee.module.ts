@@ -6,6 +6,7 @@ import { EmployeeListComponent } from './components/employee-list/employee-list.
 import { EmployeeAddEditComponent } from './components/employee-add-edit/employee-add-edit.component';
 import { MaterialModule } from 'src/shared/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/shared/shared.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EmployeeRoutingModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class EmployeeModule { }

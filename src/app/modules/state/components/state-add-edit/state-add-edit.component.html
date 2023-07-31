@@ -1,35 +1,45 @@
-<div class="user-wrapper">
-    <mat-card class="user-card">
-        <mat-card-header>
-            <mat-card-title *ngIf="!stateId">Add State</mat-card-title>
-            <mat-card-title *ngIf="stateId">Update State</mat-card-title>
-            <mat-card-subtitle>Enter following Details </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <form [formGroup]="stateForm">
-
-                <mat-form-field appearance="fill">
-                    <mat-label>Country</mat-label>
-                    <mat-select formControlName="countryId" (selectionChange)="countryChange()">
-                        <mat-option *ngFor="let country of countries" [value]="country.id">
-                            {{ country.name }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field appearance="fill">
-                    <mat-label>State Name</mat-label>
-                    <input matInput formControlName="name">
-                    <mat-error *ngIf="stateForm.get('name')?.hasError('required')">This is a Required Field</mat-error>
-                </mat-form-field>
-            </form>
-        </mat-card-content>
-        <mat-card-actions>
-            <span>
-                <button *ngIf="!stateId" mat-stroked-button color="primary" type="submit" (click)="addState()">Add State</button>
-                <button *ngIf="stateId" mat-stroked-button color="primary" type="submit" (click)="editState()">Update State</button>
-                <button mat-stroked-button color="primary" type="button" routerLink="/dashboard">Cancel</button>
-            </span>
-        </mat-card-actions>
-    </mat-card>
+<div class="top-container">
+    <app-header (click)="drawer.toggle()"></app-header>
 </div>
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="sidenav" mode="side" opened>
+
+        <app-sidebar></app-sidebar>
+
+    </mat-drawer>
+    <div class="user-wrapper">
+        <mat-card class="user-card">
+            <mat-card-header>
+                <mat-card-title *ngIf="!stateId">Add State</mat-card-title>
+                <mat-card-title *ngIf="stateId">Update State</mat-card-title>
+                <mat-card-subtitle>Enter following Details </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <form [formGroup]="stateForm">
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Country</mat-label>
+                        <mat-select formControlName="countryId" (selectionChange)="countryChange()">
+                            <mat-option *ngFor="let country of countries" [value]="country.id">
+                                {{ country.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>State Name</mat-label>
+                        <input matInput formControlName="name">
+                        <mat-error *ngIf="stateForm.get('name')?.hasError('required')">This is a Required Field</mat-error>
+                    </mat-form-field>
+                </form>
+            </mat-card-content>
+            <mat-card-actions>
+                <span>
+                    <button *ngIf="!stateId" mat-stroked-button color="primary" type="submit" (click)="addState()">Add State</button>
+                    <button *ngIf="stateId" mat-stroked-button color="primary" type="submit" (click)="editState()">Update State</button>
+                    <button mat-stroked-button color="primary" type="button" routerLink="/dashboard">Cancel</button>
+                </span>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</mat-drawer-container>

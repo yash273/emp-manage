@@ -1,38 +1,48 @@
-<div class="user-wrapper">
-    <mat-card class="user-card">
-
-        <button mat-raised-button class="add-button" color="accent" (click)="addEmployee()" *ngIf="hasAccessToAdd">add User</button>
-
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-            <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef> Id. </th>
-                <td mat-cell *matCellDef="let user"> {{user.id}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="first_name">
-                <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td mat-cell *matCellDef="let user"> {{user.first_name}} {{user.last_name}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="email">
-                <th mat-header-cell *matHeaderCellDef> Email </th>
-                <td mat-cell *matCellDef="let user"> {{user.email}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef> Action </th>
-                <td mat-cell *matCellDef="let user">
-                    <button mat-icon-button *ngIf="hasAccessToEdit" (click)="editEmployee(user.id)"><mat-icon>edit</mat-icon></button>
-                    <ng-container *ngIf="!hasAccessToEdit">
-                        <mat-icon matTooltip="not action access" class="no-access">block</mat-icon>
-                    </ng-container>
-                </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-
-    </mat-card>
+<div class="top-container">
+    <app-header (click)="drawer.toggle()"></app-header>
 </div>
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="sidenav" mode="side" opened>
+
+        <app-sidebar></app-sidebar>
+
+    </mat-drawer>
+    <div class="user-wrapper">
+        <mat-card class="user-card">
+
+            <button mat-raised-button class="add-button" color="accent" (click)="addEmployee()" *ngIf="hasAccessToAdd">add User</button>
+
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> Id. </th>
+                    <td mat-cell *matCellDef="let user"> {{user.id}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="first_name">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let user"> {{user.first_name}} {{user.last_name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef> Email </th>
+                    <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef> Action </th>
+                    <td mat-cell *matCellDef="let user">
+                        <button mat-icon-button *ngIf="hasAccessToEdit" (click)="editEmployee(user.id)"><mat-icon>edit</mat-icon></button>
+                        <ng-container *ngIf="!hasAccessToEdit">
+                            <mat-icon matTooltip="not action access" class="no-access">block</mat-icon>
+                        </ng-container>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+        </mat-card>
+    </div>
+</mat-drawer-container>

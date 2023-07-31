@@ -1,123 +1,153 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Route, User } from 'src/app/core/auth/interface/user';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { User } from 'src/app/core/auth/interface/user';
 import { AuthService } from 'src/app/core/auth/service/auth.service';
+import { CityService } from 'src/app/modules/city/service/city.service';
+import { StateService } from 'src/app/modules/state/service/state.service';
 import { SharedService } from 'src/shared/service/shared.service';
 
-interface SubMenuItem {
-  label: string;
-  route: string;
+interface Result {
+  name: string;
+  id: number;
+  value: number;
 }
 
-interface MenuItem {
-  label: string;
-  subMenuItems: SubMenuItem[];
-}
-
-interface navLinks {
-
-}
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
 
-  routes!: Route[];
-  filteredRoutes: any[] = [];
-  userId!: any;
-  currentUser!: User;
-  menuItems: MenuItem[] = [];
+  countries: any;
+  users: any;
+  states: any;
+  cities: any;
+  data!: Result[];
+  multi!: [[]];
+  selectedLocation = 'country'
+  currentCountry!: any;
+
 
   constructor(
+    private sharedService: SharedService,
     private authService: AuthService,
-    private router: Router,
-    private sharedService: SharedService
+    private stateService: StateService,
+    private cityService: CityService
   ) {
-    this.userId = this.sharedService.getUserFromLocal();
   }
 
   ngOnInit(): void {
-    this.getAllRoutes();
-    this.getUserRoutes()
-  }
-
-  logout() {
-    this.sharedService.removeLoggedUser();
-    this.sharedService.showAlert('Successfully Logged out', "success")
-    this.router.navigate(['/login']);
-  }
-
-  getAllRoutes() {
-    this.authService.getRoutes().subscribe((res) => {
-      this.routes = res;
+    this.sharedService.getCounties().subscribe((res) => {
+      this.countries = res;
+    });
+    this.stateService.getStates().subscribe((res) => {
+      this.states = res;
+    });
+    this.cityService.getCities().subscribe((res) => {
+      this.cities = res;
     });
   }
 
-  getUserRoutes() {
-    this.authService.getUserData(this.userId).subscribe((res) => {
-      this.currentUser = res;
-      if (res && res.route_rights) {
-        this.filteredRoutes = this.routes.filter((route) => res.route_rights.includes(route.id) && route.route !== 'dashboard');
-        this.change()
-      }
-    })
+  ngAfterViewInit(): void {
+    this.initFunction();
   }
 
-  change() {
+  initFunction() {
+    this.authService.allUsers().subscribe((res) => {
+      this.users = res;
 
-    const routes = this.filteredRoutes;
-    const groupRoutesByMainMenu = (routes = this.filteredRoutes) => {
-      const groupedRoutes: any = {};
+      setTimeout(() => {
+        this.usersInCountry();
+      }, 20)
+    });
+  }
 
-      routes.forEach((route) => {
-        const mainMenuLabel = route.route.split('/')[0];
+  view: any = [800, 300];
+  piView: any = [500, 300];
 
-        if (!groupedRoutes[mainMenuLabel]) {
-          groupedRoutes[mainMenuLabel] = [];
-        }
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Locations';
+  showYAxisLabel = true;
+  showDataLabel = true;
+  yAxisLabel = 'Users';
+  colorScheme = 'picnic';
+  noBarWhenZero = false;
+  legendPosition: any = 'right';
+  barPadding = 16;
+  wrapTicks = true;
+  roundDomains = true;
+  piCountryData!: any[];
+  piStateData!: any[];
+  piCityData!: any[];
 
-        groupedRoutes[mainMenuLabel].push(route);
-      });
 
-      return groupedRoutes;
-    };
+  countUsersByLocation(users: any[], locations: any[], locationKey: string): Result[] {
+    const countResult: { [locationId: number]: number } = {};
 
-    const groupedRoutes = groupRoutesByMainMenu(routes);
+    for (const user of users) {
+      if (countResult[user[locationKey]] === undefined) {
+        countResult[user[locationKey]] = 1;
+      } else {
+        countResult[user[locationKey]]++;
+      }
+    }
 
-    this.menuItems = Object.keys(groupedRoutes).map((mainMenuLabel) => {
+    const result: Result[] = locations.map((location: any) => {
       return {
-        label: mainMenuLabel,
-        subMenuItems: groupedRoutes[mainMenuLabel].map((route: any) => {
-          return {
-            label: route.route.split('/').slice(1).join(' '),
-            route: `${route.route}`
-          };
-        })
+        name: location.name,
+        value: countResult[location.id] || 0,
+        id: location.id,
       };
     });
 
+    return result;
   }
 
-  isLinkActive(route: string): boolean {
-    return this.router.isActive(route, true);
+  usersInCountry() {
+    const data = this.countUsersByLocation(this.users, this.countries, 'country');
+    Object.assign(this, { data });
+    const piCountryData = this.countUsersByLocation(this.users, this.countries, 'country');
+    Object.assign(this, { piCountryData });
   }
 
-  getIconForRoute(route: string): string {
-    switch (route) {
-      case 'country':
-        return 'public';
-      case 'state':
-        return 'location_city';
-      case 'city':
-        return 'location_on';
-      case 'employee':
-        return 'person';
-      default:
-        return 'dashboard';
-    }
+  usersInState() {
+    const data = this.countUsersByLocation(this.users, this.states, 'state');
+    Object.assign(this, { data });
+  }
+
+  usersInCity() {
+    const data = this.countUsersByLocation(this.users, this.cities, 'city');
+    Object.assign(this, { data });
+  }
+
+  selectedCountry: any;
+  selectedState: any;
+
+  onSelectPieCountry(event: any) {
+    this.selectedCountry = this.countries.find((country: any) => country.name === event.name);
+    if (this.selectedCountry) {
+      const currentCountryId = this.selectedCountry.id;
+      this.sharedService.getStates(currentCountryId).subscribe((res: any) => {
+        const piStateData = this.countUsersByLocation(this.users, res, 'state');
+        Object.assign(this, { piStateData });
+      })
+    };
+  }
+
+  onSelectPieState(event: any) {
+    this.selectedState = this.states.find((state: any) => state.name === event.name);
+    if (this.selectedState) {
+      const currentStateId = this.selectedState.id;
+      this.sharedService.getCities(currentStateId).subscribe((res: any) => {
+        const piCityData = this.countUsersByLocation(this.users, res, 'city');
+        Object.assign(this, { piCityData });
+      })
+    };
   }
 
 }

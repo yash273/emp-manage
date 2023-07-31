@@ -14,7 +14,7 @@
         1,
         4,
         
-        8,
+        7,
         10
       ],
       "id": 4
@@ -434,54 +434,13 @@
       "state": 10,
       "city": 16,
       "route_rights":[
-    {
-      "value": true,
-      "route": "country"
-    },
-    {
-      "value": false,
-      "route": "country/add"
-    },
-    {
-      "value": false,
-      "route": "country/edit"
-    },
-    {
-      "value": true,
-      "route": "state"
-    },
-    {
-      "value": false,
-      "route": "state/add"
-    },
-    {
-      "value": false,
-      "route": "state/edit"
-    },
-    {
-      "value": true,
-      "route": "city"
-    },
-    {
-      "value": false,
-      "route": "city/add"
-    },
-    {
-      "value": false,
-      "route": "city/edit"
-    },
-    {
-      "value": false,
-      "route": "employee"
-    },
-    {
-      "value": false,
-      "route": "employee/add"
-    },
-    {
-      "value": false,
-      "route": "employee/edit"
-    }
+    1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
   ],
       "id": 25
     }

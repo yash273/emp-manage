@@ -26,24 +26,43 @@ export const canActivateGuard: CanActivateFn = (route, state) => {
       router.navigate(['/dashboard']);
       return false;
     } else {
-      let x = true;
+      // let x = true;
+      // const userId = parseInt(isUserLoggedIn, 10);
+      // authService.hasRouteAccess(userId, currentRoute).subscribe((res) => {
+      //   x = res;
+      //   if (x === true) {
+      //     return true;
+      //   } else {
+      //     if (currentRoute !== 'dashboard') {
+      //       sharedService.showAlert("Looks like You are not Authorize to Access this page!", "error");
+      //       router.navigate(['/dashboard']);
+      //       return false;
+      //     } else {
+      //       router.navigate(['/dashboard']);
+      //       return false;
+      //     }
+      //   }
+      // })
+      // return x;
       const userId = parseInt(isUserLoggedIn, 10);
-      authService.hasRouteAccess(userId, currentRoute).subscribe((res) => {
-        x = res;
-        if (x === true) {
-          return true;
-        } else {
-          if (currentRoute !== 'dashboard') {
-            sharedService.showAlert("Looks like You are not Authorize to Access this page!", "error");
-            router.navigate(['/dashboard']);
-            return false;
+      return authService.hasRouteAccess(userId, currentRoute).pipe(
+        switchMap(hasAccess => {
+          if (hasAccess) {
+            return of(true);
           } else {
-            router.navigate(['/dashboard']);
-            return false;
+            if (currentRoute !== 'dashboard') {
+              sharedService.showAlert("Looks like You are not Authorize to Access this page!", "error");
+            }
+            // router.navigate(['/dashboard']);
+            return of(false);
           }
-        }
-      })
-      return x;
+        }),
+        catchError(() => {
+          console.log('Error occurred during access check.');
+          router.navigate(['/dashboard']);
+          return of(false);
+        })
+      );
     }
   } else {
     if (currentRoute === 'login' || currentRoute === 'signup' || currentRoute === '') {
@@ -54,4 +73,5 @@ export const canActivateGuard: CanActivateFn = (route, state) => {
       return false;
     }
   }
+  // return true
 }

@@ -1,0 +1,12 @@
+<mat-list>
+    <mat-list-item [routerLinkActive]="['active-link']" [routerLink]="'/dashboard'">
+        <mat-icon matListItemIcon>dashboard</mat-icon>
+        <div matListItemTitle>Dashboard</div>
+    </mat-list-item>
+    <ng-container *ngFor="let menuItem of menuItems">
+        <mat-list-item [routerLinkActive]="['active-link']" [routerLink]="['/' + menuItem.label]">
+            <mat-icon matListItemIcon>{{getIconForRoute(menuItem.label)}}</mat-icon>
+            <div matListItemTitle>{{ menuItem.label | titlecase}}</div>
+        </mat-list-item>
+    </ng-container>
+</mat-list>

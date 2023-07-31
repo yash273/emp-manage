@@ -1,42 +1,49 @@
 <div class="top-container">
-    <mat-toolbar color="primary">
-        <mat-toolbar-row>
-            <button mat-icon-button (click)="drawer.toggle()" class="example-icon" aria-label="Example icon-button with menu icon">
-                <mat-icon>menu</mat-icon>
-            </button>
-            <span>Emp Manage</span>
-
-            <span class="example-spacer"></span>
-            <button mat-button [matMenuTriggerFor]="menu">
-                <span> Hi, {{currentUser?.first_name}}</span>
-                <mat-icon>keyboard_arrow_down</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="logout()">log out</button>
-            </mat-menu>
-        </mat-toolbar-row>
-    </mat-toolbar>
+    <app-header (click)="drawer.toggle()"></app-header>
 </div>
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="sidenav" mode="side" opened>
-
-        <mat-list>
-            <mat-list-item [routerLinkActive]="['active-link']" [routerLink]="'/dashboard'">
-                <mat-icon matListItemIcon>dashboard</mat-icon>
-                <div matListItemTitle>Dashboard</div>
-            </mat-list-item>
-            <ng-container *ngFor="let menuItem of menuItems">
-                <mat-list-item [routerLinkActive]="['active-link']" [routerLink]="menuItem.label">
-                    <mat-icon matListItemIcon>{{getIconForRoute(menuItem.label)}}</mat-icon>
-                    <div matListItemTitle>{{ menuItem.label | titlecase}}</div>
-                </mat-list-item>
-            </ng-container>
-        </mat-list>
-
+        <app-sidebar></app-sidebar>
     </mat-drawer>
     <div class="side-container">
-        <div class="lower-container">
-            <router-outlet></router-outlet>
+        <div class="lower-container-x">
+            <div class="container">
+                <ngx-charts-bar-vertical [roundDomains]="roundDomains" [wrapTicks]="wrapTicks" [barPadding]="barPadding"
+                    [legendPosition]="legendPosition" [view]="view" [noBarWhenZero]="noBarWhenZero" [scheme]="colorScheme" [results]="data"
+                    [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel">
+                </ngx-charts-bar-vertical>
+
+
+                <mat-form-field appearance="outline">
+                    <mat-select [(value)]="selectedLocation">
+                        <mat-option value="country" (click)="usersInCountry()">Country</mat-option>
+                        <mat-option value="state" (click)="usersInState()">State</mat-option>
+                        <mat-option value="city" (click)="usersInCity()">City</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="pie-chart-container">
+                <div class="country-div">
+                    <div class="title">Users in Each Country</div>
+                    <ngx-charts-pie-chart [view]="piView" [scheme]="'cool'" [results]="piCountryData" [gradient]="false" [legend]="false"
+                        [labels]="true" (select)="onSelectPieCountry($event)">
+                    </ngx-charts-pie-chart>
+                </div>
+                <div *ngIf="piStateData" class="state-div">
+                    <div class="title">Users in {{selectedCountry.name}}</div>
+                    <ngx-charts-pie-chart [view]="piView" [scheme]="'flame'" [results]="piStateData" [gradient]="false" [legend]="false"
+                        [labels]="true" (select)="onSelectPieState($event)">
+                    </ngx-charts-pie-chart>
+                </div>
+                <div *ngIf="piCityData" class="city-div">
+                    <div class="title">Users in {{selectedState.name}}</div>
+                    <ngx-charts-pie-chart [view]="piView" [scheme]="'horizon'" [results]="piCityData" [gradient]="false" [legend]="false"
+                        [labels]="true">
+                    </ngx-charts-pie-chart>
+                </div>
+            </div>
         </div>
     </div>
 </mat-drawer-container>

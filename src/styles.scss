@@ -17,3 +17,12 @@ app-info{margin: 20px;margin-right: auto;}
 }
 .mat-drawer.mat-drawer-side{position: fixed;top: 65px   ;}
 .no-access{color: #D3D3D3;}
+.side-container{display: flex;flex-direction: column;min-height: 100vh;
+    .top-container{display: flex;position: sticky;top: 0;right: 0;z-index: 1000;}}
+p{margin: 0 0 0 0;}
+.top-container{display: flex;position: sticky;top: 0;right: 0;z-index: 1000;}
+.lower-container{display: flex;justify-content: center;align-items: center;flex-direction: column;}
+.sidenav{width: 100%;max-width: 240px;}
+.example-spacer {flex: 1 1 auto;}
+.active-link{background-color: #f0ebf8;};
+app-header{width: 100%;}

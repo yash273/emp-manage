@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span>Emp Manage</span>
+
+        <span class="example-spacer"></span>
+        <button mat-button [matMenuTriggerFor]="menu">
+            <span> Hi, {{currentUser?.first_name}}</span>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="logout()">log out</button>
+        </mat-menu>
+    </mat-toolbar-row>
+</mat-toolbar>
