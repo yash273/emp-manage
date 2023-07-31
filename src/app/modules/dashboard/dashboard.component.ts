@@ -36,6 +36,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     private cityService: CityService
   ) {
   }
+  isDrawerOpen = false;
+
+  toggleDrawer(): void {
+    this.isDrawerOpen = !this.isDrawerOpen;
+  }
 
   ngOnInit(): void {
     this.sharedService.getCounties().subscribe((res) => {

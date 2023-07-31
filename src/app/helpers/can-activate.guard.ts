@@ -26,41 +26,20 @@ export const canActivateGuard: CanActivateFn = (route, state) => {
       router.navigate(['/dashboard']);
       return false;
     } else {
-      // let x = true;
-      // const userId = parseInt(isUserLoggedIn, 10);
-      // authService.hasRouteAccess(userId, currentRoute).subscribe((res) => {
-      //   x = res;
-      //   if (x === true) {
-      //     return true;
-      //   } else {
-      //     if (currentRoute !== 'dashboard') {
-      //       sharedService.showAlert("Looks like You are not Authorize to Access this page!", "error");
-      //       router.navigate(['/dashboard']);
-      //       return false;
-      //     } else {
-      //       router.navigate(['/dashboard']);
-      //       return false;
-      //     }
-      //   }
-      // })
-      // return x;
-      const userId = parseInt(isUserLoggedIn, 10);
-      return authService.hasRouteAccess(userId, currentRoute).pipe(
-        switchMap(hasAccess => {
-          if (hasAccess) {
-            return of(true);
+      return authService.hasRouteAccess(parseInt(isUserLoggedIn, 10), currentRoute).pipe(
+        map((res: boolean) => {
+          if (res) {
+            return true;
           } else {
             if (currentRoute !== 'dashboard') {
               sharedService.showAlert("Looks like You are not Authorize to Access this page!", "error");
+              router.navigate(['/dashboard']);
+              return false;
+            } else {
+              // router.navigate(['/dashboard']);
+              return false;
             }
-            // router.navigate(['/dashboard']);
-            return of(false);
           }
-        }),
-        catchError(() => {
-          console.log('Error occurred during access check.');
-          router.navigate(['/dashboard']);
-          return of(false);
         })
       );
     }
@@ -75,3 +54,22 @@ export const canActivateGuard: CanActivateFn = (route, state) => {
   }
   // return true
 }
+      // const userId = parseInt(isUserLoggedIn, 10);
+      // return authService.hasRouteAccess(userId, currentRoute).pipe(
+      //   switchMap(hasAccess => {
+      //     if (hasAccess) {
+      //       return of(true);
+      //     } else {
+      //       if (currentRoute !== 'dashboard') {
+      //         sharedService.showAlert("Looks like You are not Authorize to Access this page!", "error");
+      //       }
+      //       router.navigate(['/dashboard']);
+      //       return of(false);
+      //     }
+      //   }),
+      //   catchError(() => {
+      //     console.log('Error occurred during access check.');
+      //     router.navigate(['/dashboard']);
+      //     return of(false);
+      //   })
+      // );

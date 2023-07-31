@@ -1,7 +1,10 @@
 <div class="top-container">
-    <app-header (click)="drawer.toggle()"></app-header>
+    <app-header ></app-header>
 </div>
 <mat-drawer-container class="example-container" autosize>
+    <button mat-icon-button color="primary"  (click)="drawer.toggle()" class="example-icon close-button">
+        <mat-icon>menu</mat-icon>
+    </button>
     <mat-drawer #drawer class="sidenav" mode="side" opened>
 
         <app-sidebar></app-sidebar>
