@@ -1,6 +1,9 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import { Observable, catchError, of, switchMap, tap } from 'rxjs';
 import { User } from 'src/app/core/auth/interface/user';
 import { AuthService } from 'src/app/core/auth/service/auth.service';
+import { canActivateGuard } from 'src/app/helpers/can-activate.guard';
 import { CityService } from 'src/app/modules/city/service/city.service';
 import { StateService } from 'src/app/modules/state/service/state.service';
 import { SharedService } from 'src/shared/service/shared.service';
@@ -33,13 +36,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     private sharedService: SharedService,
     private authService: AuthService,
     private stateService: StateService,
-    private cityService: CityService
+    private cityService: CityService,
+    private router: Router
   ) {
-  }
-  isDrawerOpen = false;
-
-  toggleDrawer(): void {
-    this.isDrawerOpen = !this.isDrawerOpen;
   }
 
   ngOnInit(): void {

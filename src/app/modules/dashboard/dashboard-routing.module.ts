@@ -6,11 +6,6 @@ import { canActivateGuard } from 'src/app/helpers/can-activate.guard';
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: '/dashboard'
-  },
-  {
-    path: '',
     canActivate: [canActivateGuard],
     component: DashboardComponent,
   }

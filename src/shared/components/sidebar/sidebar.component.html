@@ -4,7 +4,7 @@
         <div matListItemTitle>Dashboard</div>
     </mat-list-item>
     <ng-container *ngFor="let menuItem of menuItems">
-        <mat-list-item [routerLinkActive]="['active-link']" [routerLink]="['/' + menuItem.label]">
+        <mat-list-item [routerLinkActive]="['active-link']" [routerLink]="'/' + getRouterLink(menuItem)">
             <mat-icon matListItemIcon>{{getIconForRoute(menuItem.label)}}</mat-icon>
             <div matListItemTitle>{{ menuItem.label | titlecase}}</div>
         </mat-list-item>

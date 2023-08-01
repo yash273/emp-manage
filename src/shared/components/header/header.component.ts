@@ -11,11 +11,8 @@ import { SharedService } from 'src/shared/service/shared.service';
 })
 export class HeaderComponent implements OnInit {
 
-  routes!: Route[];
-  filteredRoutes: any[] = [];
   userId!: any;
   currentUser!: User;
-  // menuItems: MenuItem[] = [];
 
   constructor(
     private authService: AuthService,
@@ -30,21 +27,12 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/login']);
   }
   ngOnInit(): void {
-    this.getAllRoutes();
-    this.getUserRoutes()
-  }
-  getAllRoutes() {
-    this.authService.getRoutes().subscribe((res) => {
-      this.routes = res;
-    });
+    this.getUserData()
   }
 
-  getUserRoutes() {
+  getUserData() {
     this.authService.getUserData(this.userId).subscribe((res) => {
       this.currentUser = res;
-      if (res && res.route_rights) {
-        this.filteredRoutes = this.routes.filter((route) => res.route_rights.includes(route.id) && route.route !== 'dashboard');
-      }
     })
   }
 
