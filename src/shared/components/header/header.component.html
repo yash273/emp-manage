@@ -13,7 +13,7 @@
                 <mat-select [(value)]="selectedLang" (selectionChange)="switchLang(selectedLang)">
                     <mat-select-trigger>
                         <span class="option">
-                            <img [src]="getFlagIcon(selectedLang)" alt="" class="flag">
+                            <img [src]="getFlagIcon(selectedLang)" alt="flag" class="flag">
                         </span>
                     </mat-select-trigger>
                     <mat-option *ngFor="let language of languageList" [value]="language.code">
