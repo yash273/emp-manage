@@ -7,6 +7,7 @@ import { CityAddEditComponent } from './components/city-add-edit/city-add-edit.c
 import { MaterialModule } from 'src/shared/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { SharedModule } from 'src/shared/shared.module';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    TranslateModule
   ]
 })
 export class CityModule { }

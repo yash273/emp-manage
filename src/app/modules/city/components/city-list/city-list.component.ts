@@ -29,6 +29,13 @@ export class CityListComponent implements OnInit {
     this.stateService.getStates().subscribe((res) => {
       this.states = res;
     });
+    this.userId = this.sharedService.getUserFromLocal();
+    this.authService.hasRouteAccess(this.userId, 'city/add').subscribe((res) => {
+      this.hasAccessToAdd = res;
+    });
+    this.authService.hasRouteAccess(this.userId, 'city/edit').subscribe((res) => {
+      this.hasAccessToEdit = res;
+    });
 
   }
 
@@ -36,13 +43,7 @@ export class CityListComponent implements OnInit {
     this.cityService.getCities().subscribe((res) => {
       this.dataSource = res;
     });
-    this.userId = this.sharedService.getUserFromLocal();
-    this.authService.hasRouteAccess(this.userId, 'city/add').subscribe((res) => {
-      this.hasAccessToAdd = res;
-    });
-    this.authService.hasRouteAccess(this.userId, 'city/edit').subscribe((res) => {
-      this.hasAccessToEdit = res;
-    })
+
 
   }
 

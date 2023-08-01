@@ -32,3 +32,8 @@ app-header{width: 100%;}
     top: 8px;
 }
 .header-title{margin-left: 50px;}
+.language-menu{margin-top: 22px;
+    mat-form-field{width: 165px;}
+}
+.flag{width: 30px;margin-right: 6px;}
+.option{display: flex;align-items: center;}

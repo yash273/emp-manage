@@ -27,10 +27,7 @@ export class CountryListComponent implements OnInit {
   ) {
     this.sharedService.getCounties().subscribe((res: any) => {
       this.dataSource.data = res;
-    })
-  }
-
-  ngOnInit(): void {
+    });
     this.userId = this.sharedService.getUserFromLocal();
     this.authService.hasRouteAccess(this.userId, 'country/add').subscribe((res) => {
       this.hasAccessToAdd = res;
@@ -38,6 +35,10 @@ export class CountryListComponent implements OnInit {
     this.authService.hasRouteAccess(this.userId, 'country/edit').subscribe((res) => {
       this.hasAccessToEdit = res;
     })
+  }
+
+  ngOnInit(): void {
+
   }
 
   addCountry() {

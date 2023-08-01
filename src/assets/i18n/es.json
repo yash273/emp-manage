@@ -1,0 +1,149 @@
+{
+    "header": {
+        "title": "Gestión de Empleados",
+        "greeting": "Hola"
+    },
+    "dashboard": {
+        "dropdown": {
+            "country": "País",
+            "state": "Estado",
+            "city": "Ciudad"
+        },
+        "pie-label": {
+            "country": "Usuarios en Cada País",
+            "state": "Usuarios en",
+            "city": "Usuarios en"
+        }
+    },
+    "country": {
+        "title": {
+            "add": "Agregar País",
+            "edit": "Actualizar País",
+            "sub": "Ingrese los siguientes detalles"
+        },
+        "ff": {
+            "country": {
+                "label": "Nombre del País",
+                "error": "Este campo es obligatorio"
+            }
+        },
+        "button": {
+            "add": "Agregar País",
+            "edit": "Actualizar País",
+            "cancel": "Cancelar"
+        }
+    },
+    "table-header": {
+        "id": "ID",
+        "country": "Nombre del País",
+        "state": "Nombre del Estado",
+        "city": "Nombre de la Ciudad",
+        "action": "Acción"
+    },
+    "state": {
+        "title": {
+            "add": "Agregar Estado",
+            "edit": "Actualizar Estado",
+            "sub": "Ingrese los siguientes detalles"
+        },
+        "ff": {
+            "country": {
+                "label": "País",
+                "error": "Este campo es obligatorio"
+            },
+            "state": {
+                "label": "Estado",
+                "error": "Este campo es obligatorio"
+            }
+        },
+        "button": {
+            "add": "Agregar Estado",
+            "edit": "Actualizar Estado",
+            "cancel": "Cancelar"
+        }
+    },
+    "city": {
+        "title": {
+            "add": "Agregar Ciudad",
+            "edit": "Actualizar Ciudad",
+            "sub": "Ingrese los siguientes detalles"
+        },
+        "ff": {
+            "state": {
+                "label": "Estado",
+                "error": "Este campo es obligatorio"
+            },
+            "city": {
+                "label": "Ciudad",
+                "error": "Este campo es obligatorio"
+            }
+        },
+        "button": {
+            "add": "Agregar Ciudad",
+            "edit": "Actualizar Ciudad",
+            "cancel": "Cancelar"
+        }
+    },
+    "employee": {
+        "title": {
+            "add": "Agregar Usuario",
+            "edit": "Actualizar Usuario",
+            "sub": "Ingrese los siguientes detalles"
+        },
+        "ff": {
+            "first_name": {
+                "label": "Nombre",
+                "error": "Este campo es obligatorio"
+            },
+            "last_name": {
+                "label": "Apellido",
+                "error": "Este campo es obligatorio"
+            },
+            "mo": {
+                "label": "Número de Teléfono Móvil",
+                "error": "Este campo es obligatorio"
+            },
+            "email": {
+                "label": "Correo Electrónico",
+                "error": "Este campo es obligatorio"
+            },
+            "role": {
+                "label": "Seleccionar Rol",
+                "error": "Este campo es obligatorio",
+                "options": {
+                    "admin": "Administrador",
+                    "employee": "Empleado"
+                }
+            },
+            "password": {
+                "label": "Contraseña",
+                "error": "Este campo es obligatorio",
+                "pattern": "Introducir una contraseña válida"
+            },
+            "confirm_password": {
+                "label": "Confirmar Contraseña",
+                "error": "Las contraseñas no coinciden"
+            },
+            "country": {
+                "label": "País",
+                "error": "Este campo es obligatorio"
+            },
+            "state": {
+                "label": "Estado",
+                "error": "Este campo es obligatorio"
+            },
+            "city": {
+                "label": "Ciudad",
+                "error": "Este campo es obligatorio"
+            },
+            "route": {
+                "label": "Editar Derechos del Usuario"
+            }
+        },
+        "button": {
+            "add": "Agregar Usuario",
+            "edit": "Actualizar Usuario",
+            "cancel": "Cancelar"
+        }
+    }
+}

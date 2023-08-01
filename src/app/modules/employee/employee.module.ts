@@ -7,6 +7,7 @@ import { EmployeeAddEditComponent } from './components/employee-add-edit/employe
 import { MaterialModule } from 'src/shared/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { SharedModule } from 'src/shared/shared.module';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    TranslateModule
   ]
 })
 export class EmployeeModule { }

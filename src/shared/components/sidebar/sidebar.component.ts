@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Route, User } from 'src/app/core/auth/interface/user';
 import { AuthService } from 'src/app/core/auth/service/auth.service';
 import { SharedService } from 'src/shared/service/shared.service';
@@ -19,7 +20,8 @@ export class SidebarComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private sharedService: SharedService,
-    private router: Router
+    private router: Router,
+    public translate: TranslateService
   ) {
     this.userId = this.sharedService.getUserFromLocal();
   }

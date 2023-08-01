@@ -9,6 +9,7 @@ import { MaterialModule } from 'src/shared/material/material.module';
 import { HeaderComponent } from 'src/shared/components/header/header.component';
 import { SidebarComponent } from 'src/shared/components/sidebar/sidebar.component';
 import { SharedModule } from 'src/shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { SharedModule } from 'src/shared/shared.module';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    TranslateModule
   ]
 })
 export class CountryModule { }

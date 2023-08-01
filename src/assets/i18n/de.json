@@ -1,0 +1,149 @@
+{
+    "header": {
+        "title": "Mitarbeiter Verwalten",
+        "greeting": "Hallo"
+    },
+    "dashboard": {
+        "dropdown": {
+            "country": "Land",
+            "state": "Bundesland",
+            "city": "Stadt"
+        },
+        "pie-label": {
+            "country": "Benutzer in jedem Land",
+            "state": "Benutzer in",
+            "city": "Benutzer in"
+        }
+    },
+    "country": {
+        "title": {
+            "add": "Land hinzufügen",
+            "edit": "Land aktualisieren",
+            "sub": "Folgende Details eingeben"
+        },
+        "ff": {
+            "country": {
+                "label": "Ländername",
+                "error": "Dies ist ein Pflichtfeld"
+            }
+        },
+        "button": {
+            "add": "Land hinzufügen",
+            "edit": "Land aktualisieren",
+            "cancel": "Abbrechen"
+        }
+    },
+    "table-header": {
+        "id": "ID",
+        "country": "Landesname",
+        "state": "Bundesstaatname",
+        "city": "Stadtname",
+        "action": "Aktion"
+    },
+    "state": {
+        "title": {
+            "add": "Bundesstaat hinzufügen",
+            "edit": "Bundesstaat aktualisieren",
+            "sub": "Folgende Details eingeben"
+        },
+        "ff": {
+            "country": {
+                "label": "Land",
+                "error": "Dies ist ein Pflichtfeld"
+            },
+            "state": {
+                "label": "Bundesstaat",
+                "error": "Dies ist ein Pflichtfeld"
+            }
+        },
+        "button": {
+            "add": "Bundesstaat hinzufügen",
+            "edit": "Bundesstaat aktualisieren",
+            "cancel": "Abbrechen"
+        }
+    },
+    "city": {
+        "title": {
+            "add": "Stadt hinzufügen",
+            "edit": "Stadt aktualisieren",
+            "sub": "Folgende Details eingeben"
+        },
+        "ff": {
+            "state": {
+                "label": "Bundesstaat",
+                "error": "Dies ist ein Pflichtfeld"
+            },
+            "city": {
+                "label": "Stadt",
+                "error": "Dies ist ein Pflichtfeld"
+            }
+        },
+        "button": {
+            "add": "Stadt hinzufügen",
+            "edit": "Stadt aktualisieren",
+            "cancel": "Abbrechen"
+        }
+    },
+    "employee": {
+        "title": {
+            "add": "Benutzer hinzufügen",
+            "edit": "Benutzer aktualisieren",
+            "sub": "Folgende Details eingeben"
+        },
+        "ff": {
+            "first_name": {
+                "label": "Vorname",
+                "error": "Dies ist ein Pflichtfeld"
+            },
+            "last_name": {
+                "label": "Nachname",
+                "error": "Dies ist ein Pflichtfeld"
+            },
+            "mo": {
+                "label": "Handynummer",
+                "error": "Dies ist ein Pflichtfeld"
+            },
+            "email": {
+                "label": "E-Mail",
+                "error": "Dies ist ein Pflichtfeld"
+            },
+            "role": {
+                "label": "Rolle wählen",
+                "error": "Dies ist ein Pflichtfeld",
+                "options": {
+                    "admin": "Administrator",
+                    "employee": "Mitarbeiter"
+                }
+            },
+            "password": {
+                "label": "Passwort",
+                "error": "Dies ist ein Pflichtfeld",
+                "pattern": "Gültiges Passwort eingeben"
+            },
+            "confirm_password": {
+                "label": "Passwort bestätigen",
+                "error": "Passwörter stimmen nicht überein"
+            },
+            "country": {
+                "label": "Land",
+                "error": "Dies ist ein Pflichtfeld"
+            },
+            "state": {
+                "label": "Bundesland",
+                "error": "Dies ist ein Pflichtfeld"
+            },
+            "city": {
+                "label": "Stadt",
+                "error": "Dies ist ein Pflichtfeld"
+            },
+            "route": {
+                "label": "Benutzerrechte bearbeiten"
+            }
+        },
+        "button": {
+            "add": "Benutzer hinzufügen",
+            "edit": "Benutzer aktualisieren",
+            "cancel": "Abbrechen"
+        }
+    }
+}

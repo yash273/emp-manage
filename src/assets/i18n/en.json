@@ -1,0 +1,149 @@
+{
+    "header": {
+        "title": "Emp Manage ",
+        "greeting": "Hi"
+    },
+    "dashboard": {
+        "dropdown": {
+            "country": "Country",
+            "state": "State",
+            "city": "City"
+        },
+        "pie-label": {
+            "country": "Users in Each Country",
+            "state": "Users in",
+            "city": "Users in"
+        }
+    },
+    "country": {
+        "title": {
+            "add": "Add Country",
+            "edit": "Update Country",
+            "sub": "Enter Following Details"
+        },
+        "ff": {
+            "country": {
+                "label": "Country Name",
+                "error": "This is a Required Field"
+            }
+        },
+        "button": {
+            "add": "Add Country",
+            "edit": "Update Country",
+            "cancel": "Cancel"
+        }
+    },
+    "table-header": {
+        "id": "Id",
+        "country": "Country Name",
+        "state": "State Name",
+        "city": "City Name",
+        "action": "Action"
+    },
+    "state": {
+        "title": {
+            "add": "Add State",
+            "edit": "Update State",
+            "sub": "Enter Following Details"
+        },
+        "ff": {
+            "country": {
+                "label": "Country",
+                "error": "This is a Required Field"
+            },
+            "state": {
+                "label": "State",
+                "error": "This is a Required Field"
+            }
+        },
+        "button": {
+            "add": "Add State",
+            "edit": "Update State",
+            "cancel": "Cancel"
+        }
+    },
+    "city": {
+        "title": {
+            "add": "Add City",
+            "edit": "Update City",
+            "sub": "Enter Following Details"
+        },
+        "ff": {
+            "state": {
+                "label": "State",
+                "error": "This is a Required Field"
+            },
+            "city": {
+                "label": "City",
+                "error": "This is a Required Field"
+            }
+        },
+        "button": {
+            "add": "Add City",
+            "edit": "Update City",
+            "cancel": "Cancel"
+        }
+    },
+    "employee": {
+        "title": {
+            "add": "Add User",
+            "edit": "Update User",
+            "sub": "Enter Following Details"
+        },
+        "ff": {
+            "first_name": {
+                "label": "First Name",
+                "error": "This is a Required Field"
+            },
+            "last_name": {
+                "label": "Last Name",
+                "error": "This is a Required Field"
+            },
+            "mo": {
+                "label": "Mobile No.",
+                "error": "This is a Required Field"
+            },
+            "email": {
+                "label": "Email",
+                "error": "This is a Required Field"
+            },
+            "role": {
+                "label": "Choose Role",
+                "error": "This is a Required Field",
+                "options": {
+                    "admin": "Admin",
+                    "employee": "Employee"
+                }
+            },
+            "password": {
+                "label": "Password",
+                "error": "This is a Required Field",
+                "pattern": "Enter Valid Password"
+            },
+            "confirm_password": {
+                "label": "Confirm Password",
+                "error": "Password not Matching"
+            },
+            "country": {
+                "label": "Country",
+                "error": "This is a Required Field"
+            },
+            "state": {
+                "label": "State",
+                "error": "This is a Required Field"
+            },
+            "city": {
+                "label": "City",
+                "error": "This is a Required Field"
+            },
+            "route": {
+                "label": "Edit User Rights"
+            }
+        },
+        "button": {
+            "add": "Add User",
+            "edit": "Update User",
+            "cancel": "Cancel"
+        }
+    }
+}

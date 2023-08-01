@@ -36,8 +36,8 @@
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef> Action </th>
                     <td mat-cell *matCellDef="let user">
-                        <button mat-icon-button *ngIf="hasAccessToEdit" (click)="editEmployee(user.id)"><mat-icon>edit</mat-icon></button>
-                        <ng-container *ngIf="!hasAccessToEdit">
+                        <button mat-icon-button *ngIf="hasAccessToEdit === true" (click)="editEmployee(user.id)"><mat-icon>edit</mat-icon></button>
+                        <ng-container *ngIf="hasAccessToEdit === false">
                             <mat-icon matTooltip="not action access" class="no-access">block</mat-icon>
                         </ng-container>
                     </td>

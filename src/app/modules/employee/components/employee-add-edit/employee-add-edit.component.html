@@ -14,62 +14,63 @@
     <div class="user-wrapper">
         <mat-card class="user-card">
             <mat-card-header>
-                <mat-card-title *ngIf="!userId">Add Employee</mat-card-title>
-                <mat-card-title *ngIf="userId">Update Employee</mat-card-title>
-                <mat-card-subtitle>Enter following Details </mat-card-subtitle>
+                <mat-card-title *ngIf="!userId">{{'employee.title.add' | translate}}</mat-card-title>
+                <mat-card-title *ngIf="userId">{{'employee.title.edit' | translate}}</mat-card-title>
+                <mat-card-subtitle>{{'employee.title.sub' | translate}} </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
                 <form [formGroup]="userForm">
                     <mat-form-field appearance="fill">
-                        <mat-label>First Name</mat-label>
+                        <mat-label>{{'employee.ff.first_name.label' | translate}}</mat-label>
                         <input matInput formControlName="first_name">
-                        <mat-error *ngIf="userForm.get('first_name')?.hasError('required')">This is a Required Field</mat-error>
+                        <mat-error *ngIf="userForm.get('first_name')?.hasError('required')">{{'employee.ff.first_name.error' | translate}}</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="fill">
-                        <mat-label>Last Name</mat-label>
+                        <mat-label>{{'employee.ff.last_name.label' | translate}}</mat-label>
                         <input matInput formControlName="last_name">
-                        <mat-error *ngIf="userForm.get('last_name')?.hasError('required')">This is a Required Field</mat-error>
+                        <mat-error *ngIf="userForm.get('last_name')?.hasError('required')">{{'employee.ff.last_name.error' | translate}}</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="fill">
-                        <mat-label>Mobile No.</mat-label>
+                        <mat-label>{{'employee.ff.mo.label' | translate}}</mat-label>
                         <input matInput formControlName="mobile">
-                        <mat-error *ngIf="userForm.get('mobile')?.hasError('required')">This is a Required Field</mat-error>
+                        <mat-error *ngIf="userForm.get('mobile')?.hasError('required')">{{'employee.ff.mo.error' | translate}}</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="fill">
-                        <mat-label>Email</mat-label>
+                        <mat-label>{{'employee.ff.email.label' | translate}}</mat-label>
                         <input matInput formControlName="email">
-                        <mat-error *ngIf="userForm.get('email')?.hasError('required')">This is a Required Field</mat-error>
+                        <mat-error *ngIf="userForm.get('email')?.hasError('required')">{{'employee.ff.email.error' | translate}}</mat-error>
                     </mat-form-field>
                     <mat-form-field>
-                        <mat-label>Choose your Role</mat-label>
+                        <mat-label>{{'employee.ff.role.label' | translate}}</mat-label>
                         <mat-select formControlName="role">
-                            <mat-option value="1">Admin</mat-option>
-                            <mat-option value="2">Employee</mat-option>
+                            <mat-option value="1">{{'employee.ff.role.options.admin' | translate}}</mat-option>
+                            <mat-option value="2">{{'employee.ff.role.options.employee' | translate}}</mat-option>
                         </mat-select>
-                        <mat-error *ngIf="userForm.get('role')?.hasError('required')">This is a Required Field</mat-error>
+                        <mat-error *ngIf="userForm.get('role')?.hasError('required')">{{'employee.ff.role.error' | translate}}</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="fill">
-                        <mat-label>Password</mat-label>
+                        <mat-label>{{'employee.ff.password.label' | translate}}</mat-label>
                         <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
                         <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                             [attr.aria-pressed]="hide">
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
-                        <mat-error *ngIf="userForm.get('password')?.hasError('required')">This is a Required Field</mat-error>
-                        <mat-error *ngIf="userForm.get('password')?.hasError('pattern')">Enter Valid Password</mat-error>
+                        <mat-error *ngIf="userForm.get('password')?.hasError('required')">{{'employee.ff.password.error' | translate}}</mat-error>
+                        <mat-error *ngIf="userForm.get('password')?.hasError('pattern')">{{'employee.ff.password.pattern' | translate}}</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="fill" *ngIf="!userId">
-                        <mat-label>Confirm Password</mat-label>
+                        <mat-label>{{'employee.ff.confirm_password.label' | translate}}</mat-label>
                         <input matInput [type]="hideConfirm ? 'password' : 'text'" formControlName="confirm_password">
                         <button type="button" mat-icon-button matSuffix (click)="hideConfirm = !hideConfirm" [attr.aria-label]="'Hide password'"
                             [attr.aria-pressed]="hideConfirm">
                             <mat-icon>{{hideConfirm ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
-                        <mat-error *ngIf="userForm.get('confirm_password')?.hasError('passwordMismatch')">Password not Matching</mat-error>
+                        <mat-error *ngIf="userForm.get('confirm_password')?.hasError('passwordMismatch')">{{'employee.ff.confirm_password.error' |
+                            translate}}</mat-error>
                     </mat-form-field>
                     <div class="selection-div">
                         <mat-form-field appearance="fill">
-                            <mat-label>Country</mat-label>
+                            <mat-label>{{'employee.ff.country.label' | translate}}</mat-label>
                             <mat-select formControlName="country" (selectionChange)="getStates(null)">
                                 <mat-option *ngFor="let country of countries" [value]="country.id">
                                     {{ country.name }}
@@ -78,7 +79,7 @@
                         </mat-form-field>
 
                         <mat-form-field appearance="fill">
-                            <mat-label>State</mat-label>
+                            <mat-label>{{'employee.ff.state.label' | translate}}</mat-label>
                             <mat-select formControlName="state" (selectionChange)="getCites(null)">
                                 <mat-option *ngFor="let state of states" [value]="state.id">
                                     {{ state.name }}
@@ -87,7 +88,7 @@
                         </mat-form-field>
 
                         <mat-form-field appearance="fill">
-                            <mat-label>City</mat-label>
+                            <mat-label>{{'employee.ff.city.label' | translate}}</mat-label>
                             <mat-select formControlName="city">
                                 <mat-option *ngFor="let city of cities" [value]="city.id">
                                     {{ city.name }}
@@ -97,7 +98,7 @@
                     </div>
 
                     <section class="example-section">
-                        <mat-label>Edit User Rights</mat-label>
+                        <mat-label>{{'employee.ff.route.label' | translate}}</mat-label>
                         <div class="checkboxes-container">
                             <ng-container formGroupName="route_rights">
                                 <ng-container *ngFor="let route of routes">
@@ -108,9 +109,12 @@
                     </section>
                     <mat-card-actions>
                         <span>
-                            <button *ngIf="!userId" mat-stroked-button color="primary" type="submit" (click)="addUser()">Add User</button>
-                            <button *ngIf="userId" mat-stroked-button color="primary" type="submit" (click)="EditUser()">Edit User</button>
-                            <button mat-stroked-button color="primary" type="button" routerLink="/dashboard">Cancel</button>
+                            <button *ngIf="!userId" mat-stroked-button color="primary" type="submit" (click)="addUser()">{{'employee.button.add' |
+                                translate}}</button>
+                            <button *ngIf="userId" mat-stroked-button color="primary" type="submit" (click)="EditUser()">{{'employee.button.edit' |
+                                translate}}</button>
+                            <button mat-stroked-button color="primary" type="button" routerLink="/dashboard">{{'employee.button.cancel' |
+                                translate}}</button>
                         </span>
                     </mat-card-actions>
                 </form>

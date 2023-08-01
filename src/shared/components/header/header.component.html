@@ -1,13 +1,31 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
 
-        <span class="header-title">Emp Manage</span>
+        <span class="header-title">{{ 'header.title' | translate }}</span>
 
         <span class="example-spacer"></span>
         <button mat-button [matMenuTriggerFor]="menu">
-            <span> Hi, {{currentUser?.first_name}}</span>
+            <span> {{'header.greeting' | translate}}, {{currentUser?.first_name}}</span>
             <mat-icon>keyboard_arrow_down</mat-icon>
         </button>
+        <span class="language-menu">
+            <mat-form-field appearance="fill">
+                <mat-select [(value)]="selectedLang" (selectionChange)="switchLang(selectedLang)">
+                    <mat-select-trigger>
+                        <span class="option">
+                            <img [src]="getFlagIcon(selectedLang)" alt="" class="flag">
+                        </span>
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let language of languageList" [value]="language.code">
+                        <span class="option">
+                            <img [src]="language.img" alt="{{ language.label }}" class="flag">
+                            {{ language.label }}
+                        </span>
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </span>
+
         <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="logout()">log out</button>
         </mat-menu>

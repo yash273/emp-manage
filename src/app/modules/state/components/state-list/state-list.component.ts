@@ -26,20 +26,21 @@ export class StateListComponent implements OnInit {
   ) {
     this.sharedService.getCounties().subscribe((res) => {
       this.countries = res;
-    })
-  }
-
-  ngOnInit(): void {
-    this.userId = this.sharedService.getUserFromLocal();
-    this.stateService.getStates().subscribe((res) => {
-      this.dataSource = res;
     });
+    this.userId = this.sharedService.getUserFromLocal();
     this.authService.hasRouteAccess(this.userId, 'state/add').subscribe((res) => {
       this.hasAccessToAdd = res;
     });
     this.authService.hasRouteAccess(this.userId, 'state/edit').subscribe((res) => {
       this.hasAccessToEdit = res;
-    })
+    });
+  }
+
+  ngOnInit(): void {
+    this.stateService.getStates().subscribe((res) => {
+      this.dataSource = res;
+    });
+
   }
 
   addState() {

@@ -20,6 +20,14 @@ export class SharedService {
     localStorage.setItem('loggedUserId', JSON.stringify(id));
   }
 
+  saveLangToLocal(lang: string) {
+    localStorage.setItem('language', JSON.stringify(lang));
+  }
+
+  getLangFromLocal() {
+    return localStorage.getItem('language');
+  }
+
   getUserFromLocal() {
     return localStorage.getItem('loggedUserId');
   }

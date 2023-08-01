@@ -7,6 +7,7 @@ import { MaterialModule } from 'src/shared/material/material.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SharedModule } from 'src/shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -19,8 +20,8 @@ import { SharedModule } from 'src/shared/shared.module';
     MaterialModule,
     NgxChartsModule,
     NgxSpinnerModule,
-    SharedModule
-
+    SharedModule,
+    TranslateModule
   ]
 })
 export class DashboardModule { }

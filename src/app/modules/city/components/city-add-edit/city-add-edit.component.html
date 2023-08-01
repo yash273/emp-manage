@@ -14,35 +14,37 @@
     <div class="user-wrapper">
         <mat-card class="user-card">
             <mat-card-header>
-                <mat-card-title *ngIf="!cityId">Add City</mat-card-title>
-                <mat-card-title *ngIf="cityId">Update City</mat-card-title>
-                <mat-card-subtitle>Enter following Details </mat-card-subtitle>
+                <mat-card-title *ngIf="!cityId">{{'city.title.add' | translate}}</mat-card-title>
+                <mat-card-title *ngIf="cityId">{{'city.title.edit' | translate}}</mat-card-title>
+                <mat-card-subtitle>{{'city.title.sub' | translate}}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
                 <form [formGroup]="cityForm">
 
                     <mat-form-field appearance="fill">
-                        <mat-label>State</mat-label>
+                        <mat-label>{{'city.ff.state.label' | translate}}</mat-label>
                         <mat-select formControlName="stateId" (selectionChange)="stateChange()">
                             <mat-option *ngFor="let state of states" [value]="state.id">
                                 {{ state.name }}
                             </mat-option>
                         </mat-select>
-                        <mat-error *ngIf="cityForm.get('stateId')?.hasError('required')">This is a Required Field</mat-error>
+                        <mat-error *ngIf="cityForm.get('stateId')?.hasError('required')">{{'city.ff.state.error' | translate}}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field appearance="fill">
-                        <mat-label>City Name</mat-label>
+                        <mat-label>{{'city.ff.city.label' | translate}}</mat-label>
                         <input matInput formControlName="name">
-                        <mat-error *ngIf="cityForm.get('name')?.hasError('required')">This is a Required Field</mat-error>
+                        <mat-error *ngIf="cityForm.get('name')?.hasError('required')">{{'city.ff.city.error' | translate}}</mat-error>
                     </mat-form-field>
                 </form>
             </mat-card-content>
             <mat-card-actions>
                 <span>
-                    <button *ngIf="!cityId" mat-stroked-button color="primary" type="submit" (click)="addCity()">Add City</button>
-                    <button *ngIf="cityId" mat-stroked-button color="primary" type="submit" (click)="editCity()">Update City</button>
-                    <button mat-stroked-button color="primary" type="button" routerLink="/dashboard">Cancel</button>
+                    <button *ngIf="!cityId" mat-stroked-button color="primary" type="submit" (click)="addCity()">{{'city.button.add' |
+                        translate}}</button>
+                    <button *ngIf="cityId" mat-stroked-button color="primary" type="submit" (click)="editCity()">{{'city.button.edit' |
+                        translate}}</button>
+                    <button mat-stroked-button color="primary" type="button" routerLink="/dashboard">{{'city.button.cancel' | translate}}</button>
                 </span>
             </mat-card-actions>
         </mat-card>
