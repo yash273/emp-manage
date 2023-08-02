@@ -15,11 +15,6 @@ const routes: Routes = [
     canActivate: [canActivateGuard],
     component: CityAddEditComponent
   },
-  {
-    path: 'edit/:id',
-    canActivate: [canActivateGuard],
-    component: CityAddEditComponent
-  }
 ];
 
 @NgModule({

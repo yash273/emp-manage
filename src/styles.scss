@@ -33,7 +33,10 @@ app-header{width: 100%;}
 }
 .header-title{margin-left: 50px;}
 .language-menu{margin-top: 22px;
-    mat-form-field{width: 165px;}
+    mat-form-field{width: 120px;}
+    .mat-mdc-form-field-infix{min-height: 40px;}
+    .mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mat-mdc-form-field-infix{ padding-top: 8px;padding-bottom: 0;}
+    .mdc-text-field--filled:not(.mdc-text-field--disabled){background-color: #673AB7}
 }
 .flag{width: 30px;margin-right: 6px;}
 .option{display: flex;align-items: center;}

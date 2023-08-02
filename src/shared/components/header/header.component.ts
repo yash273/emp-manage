@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Route, User } from 'src/app/core/auth/interface/user';
 import { AuthService } from 'src/app/core/auth/service/auth.service';
+import { LanguageService } from 'src/shared/service/language.service';
 import { SharedService } from 'src/shared/service/shared.service';
 
 const enFlag = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/64px-Flag_of_the_United_Kingdom_%283-5%29.svg.png'
@@ -18,7 +19,7 @@ export class HeaderComponent implements OnInit {
 
   userId!: any;
   currentUser!: User;
-  selectedLang!: string;
+  selectedLang: string = 'en';
 
   languageList = [
     {
@@ -42,9 +43,15 @@ export class HeaderComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private sharedService: SharedService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private languageService: LanguageService
   ) {
     this.userId = this.sharedService.getUserFromLocal();
+
+    // this.languageService.selectedLang$.subscribe((lang) => {
+    //   this.selectedLang = lang;
+    //   this.translate.use(lang);
+    // });
 
   }
 
@@ -55,16 +62,10 @@ export class HeaderComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getUserData();
-    this.getSelectedLanguage();
-  }
-  getSelectedLanguage() {
-    const storedLang = this.sharedService.getLangFromLocal();
-    if (storedLang) {
-      console.log(storedLang)
-      this.selectedLang = storedLang;
-    } else {
-      this.selectedLang = 'en';
-    }
+    this.languageService.selectedLang$.subscribe((lang) => {
+      this.selectedLang = lang;
+      this.translate.use(lang);
+    });
   }
 
   getUserData() {
@@ -73,10 +74,8 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  switchLang(lang: any) {
-    this.translate.use(lang);
-    this.selectedLang = lang;
-    this.sharedService.saveLangToLocal(lang);
+  switchLang(lang: string) {
+    this.languageService.setSelectedLang(lang);
   }
 
   getFlagIcon(languageCode: string): string {

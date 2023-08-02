@@ -76,7 +76,7 @@ export class StateAddEditComponent implements OnInit {
           this.sharedService.showAlert("Oops! Something Went Wrong!", 'default');
         }
       });
-      this.router.navigate(['/dashboard'])
+      this.router.navigate(['/state'])
     } else {
       this.sharedService.showAlert('Form is invalid. Please check the fields.', 'error');
     }
@@ -96,7 +96,7 @@ export class StateAddEditComponent implements OnInit {
           }
         });
       }
-      this.router.navigate(['/dashboard'])
+      this.router.navigate(['/state'])
     } else {
       this.sharedService.showAlert('Form is invalid. Please check the fields.', 'error');
     }

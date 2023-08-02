@@ -30,10 +30,10 @@
             <mat-card-actions>
                 <span>
                     <button *ngIf="!countryId" mat-stroked-button color="primary" type="submit" (click)="addCountry()">{{'country.button.add'
-                        |translate}}</button>
+                        | translate}}</button>
                     <button *ngIf="countryId" mat-stroked-button color="primary" type="submit" (click)="editCountry()">{{'country.button.edit' |
                         translate}}</button>
-                    <button mat-stroked-button color="primary" type="button" routerLink="/dashboard">{{'country.button.cancel' | translate}}</button>
+                    <button mat-stroked-button color="primary" type="button" routerLink="/country">{{'country.button.cancel' | translate}}</button>
                 </span>
             </mat-card-actions>
         </mat-card>

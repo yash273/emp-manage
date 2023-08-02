@@ -9,4 +9,8 @@
             <div matListItemTitle>{{ menuItem.label | titlecase}}</div>
         </mat-list-item>
     </ng-container>
+    <mat-list-item [routerLinkActive]="['active-link']" [routerLink]="'/settings'">
+        <mat-icon matListItemIcon>settings</mat-icon>
+        <div matListItemTitle>Settings</div>
+    </mat-list-item>
 </mat-list>

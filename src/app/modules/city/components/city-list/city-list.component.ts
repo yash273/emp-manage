@@ -48,7 +48,10 @@ export class CityListComponent implements OnInit {
   }
 
   editCity(cityId: number) {
-    this.router.navigate([`city/edit/${cityId}`]);
+    this.router.navigate(
+      [`city/add`],
+      { queryParams: { id: `${cityId}` } }  //using queryParams
+    );
   }
 
   addCity() {

@@ -5,11 +5,13 @@ import { AuthService } from 'src/app/core/auth/service/auth.service';
 import { email, mob, name, pass } from 'src/shared/regex-rules/regex-rule';
 import { EncryptDecryptService } from 'src/shared/service/encrypt-decrypt.service';
 import { SharedService } from 'src/shared/service/shared.service';
+import { DateAdapter } from '@angular/material/core';
+
 
 @Component({
   selector: 'app-employee-add-edit',
   templateUrl: './employee-add-edit.component.html',
-  styleUrls: ['./employee-add-edit.component.scss']
+  styleUrls: ['./employee-add-edit.component.scss'],
 })
 export class EmployeeAddEditComponent {
   userForm!: FormGroup;
@@ -23,60 +25,6 @@ export class EmployeeAddEditComponent {
   routes!: any;
   initialRoutes: { [key: number]: boolean } = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false, 10: false, 11: false, 12: false };
 
-  r = [
-    {
-      "route": "dashboard",
-      "value": false
-    },
-    {
-      "value": false,
-      "route": "country"
-    },
-    {
-      "value": false,
-      "route": "country/add"
-    },
-    {
-      "value": false,
-      "route": "country/edit"
-    },
-    {
-      "value": false,
-      "route": "state"
-    },
-    {
-      "value": false,
-      "route": "state/add"
-    },
-    {
-      "value": false,
-      "route": "state/edit"
-    },
-    {
-      "value": false,
-      "route": "city"
-    },
-    {
-      "value": false,
-      "route": "city/add"
-    },
-    {
-      "value": false,
-      "route": "city/edit"
-    },
-    {
-      "value": false,
-      "route": "employee"
-    },
-    {
-      "value": false,
-      "route": "employee/add"
-    },
-    {
-      "value": false,
-      "route": "employee/edit"
-    }
-  ]
 
   constructor(
     private formBuilder: FormBuilder,
@@ -84,19 +32,44 @@ export class EmployeeAddEditComponent {
     private encryptDecryptService: EncryptDecryptService,
     private sharedService: SharedService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dateAdapter: DateAdapter<Date>
   ) {
+
   }
+
+  selectedDateFormat: string = 'MM/dd/yyyy';
 
   ngOnInit(): void {
     this.initializeForm();
     this.getAllRoutes()
 
+    const dateFormat = localStorage.getItem("format");
+    if (dateFormat) {
+      this.selectedDateFormat = dateFormat;
+    } else {
+      this.selectedDateFormat = 'MM/dd/yyyy';
+    }
     this.getCountries();
     this.userId = this.route.snapshot.params['id'];
     if (this.userId) {
       this.populateForm();
     };
+
+    this.changeDateFormats();
+  }
+
+  changeDateFormats() {
+
+    if (this.selectedDateFormat === 'dd/MM/yyyy') {
+      this.dateAdapter.setLocale('en-in');
+    } else if (this.selectedDateFormat === 'MM/dd/yyyy') {
+      this.dateAdapter.setLocale('en-us');
+    } else if (this.selectedDateFormat === 'yyyy/MM/dd') {
+      this.dateAdapter.setLocale('en-ca');
+    } else {
+      this.dateAdapter.setLocale('en-us');
+    }
 
   }
 
@@ -109,6 +82,7 @@ export class EmployeeAddEditComponent {
       role: [null, [Validators.required]],
       confirm_password: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.pattern(pass)]],
+      dob: ['', [Validators.required]],
       country: [null, [Validators.required]],
       state: [null, [Validators.required]],
       city: [null, [Validators.required]],
@@ -120,16 +94,13 @@ export class EmployeeAddEditComponent {
 
   populateForm() {
     this.authService.getUserData(this.userId).subscribe((res) => {
-      console.log(res);
       const userRoutes = res.route_rights;
 
-      console.log(userRoutes)
       userRoutes.forEach((key) => {
         if (this.initialRoutes.hasOwnProperty(key)) {
           this.initialRoutes[key] = true;
         }
       });
-      // console.log(this.initialRoutes);
       this.initialRoutes;
       const { password, ...previousData } = res;
       previousData.role = res.role.toString();
@@ -171,12 +142,10 @@ export class EmployeeAddEditComponent {
 
   addUser() {
     const routeRights = this.userForm.value.route_rights;
-    console.log(routeRights)
     const trueRoutes = Object.keys(routeRights)
       .filter((key) => routeRights[Number(key)])
       .map(Number);
 
-    console.log(trueRoutes)
 
     if (this.userForm.valid) {
       const formData = { ...this.userForm.value };
@@ -195,20 +164,18 @@ export class EmployeeAddEditComponent {
           this.sharedService.showAlert("Oops! Something Went Wrong!", 'default');
         }
       });
-      this.router.navigate(['/dashboard'])
+      this.router.navigate(['/employee'])
     } else {
+      console.log(this.userForm.value.dob)
       this.sharedService.showAlert("Form is invalid. Please check the fields.", 'error');
     }
   }
 
   EditUser() {
     const routeRights = this.userForm.value.route_rights;
-    console.log(routeRights)
     const trueRoutes = Object.keys(routeRights)
       .filter((key) => routeRights[Number(key)])
       .map(Number);
-
-    console.log(trueRoutes)
 
     if (this.userForm.valid) {
       const formData = { ...this.userForm.value };
@@ -225,7 +192,7 @@ export class EmployeeAddEditComponent {
           this.sharedService.showAlert("Oops! Something Went Wrong!", 'default');
         }
       });
-      this.router.navigate(['/dashboard'])
+      this.router.navigate(['/employee'])
     } else {
       this.sharedService.showAlert('Form is invalid. Please check the fields.', 'error');
     }

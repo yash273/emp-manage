@@ -14,7 +14,8 @@
     <div class="user-wrapper">
         <mat-card class="user-card">
 
-            <button mat-raised-button class="add-button" color="accent" (click)="addState()" *ngIf="hasAccessToAdd">add State</button>
+            <button mat-raised-button class="add-button" color="accent" (click)="addState()" *ngIf="hasAccessToAdd">{{'state.button.add' |
+                translate}}</button>
 
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 

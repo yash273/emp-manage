@@ -6,17 +6,17 @@
       "email": "demo@mail.com",
       "mobile": 9955668822,
       "role": 2,
-      "password": "$2a$08$EBzJwnF4a8ZfW8KsxNwtR.PVm9IlsJH2JXkqlaW/JJrT6cfXmXPYK",
+      "password": "$2a$08$TnR2sGvwtMA4cP4tEGdJouXoxYQr9.Qy2CFCjW2zIH4AzeTsBw02u",
+      "dob": "2023-08-09T18:30:00.000Z",
       "country": 2,
       "state": 5,
       "city": 11,
       "route_rights": [
-        0,
         1,
+        2,
+        3,
         4,
-        7,
-        8,
-        10
+        5
       ],
       "id": 4
     },
@@ -435,21 +435,21 @@
       "country": 4,
       "state": 10,
       "city": 16,
-      "route_rights":[
-    1,
+      "route_rights": [
+        1,
         2,
         3,
         4,
         5,
         6,
         7
-  ],
+      ],
       "id": 25
     }
   ],
   "routes": [
     {
- "id": 0,
+      "id": 0,
       "route": "dashboard"
     },
     {
@@ -615,8 +615,8 @@
     },
     {
       "name": "Austin",
-      "id": 5,
-      "stateId": 2
+      "stateId": 2,
+      "id": 5
     },
     {
       "name": "Dallas",

@@ -8,6 +8,7 @@
             <span> {{'header.greeting' | translate}}, {{currentUser?.first_name}}</span>
             <mat-icon>keyboard_arrow_down</mat-icon>
         </button>
+
         <span class="language-menu">
             <mat-form-field appearance="fill">
                 <mat-select [(value)]="selectedLang" (selectionChange)="switchLang(selectedLang)">
@@ -19,7 +20,7 @@
                     <mat-option *ngFor="let language of languageList" [value]="language.code">
                         <span class="option">
                             <img [src]="language.img" alt="{{ language.label }}" class="flag">
-                            {{ language.label }}
+                            {{ language.code }}
                         </span>
                     </mat-option>
                 </mat-select>

@@ -20,7 +20,7 @@ export class LoadingInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    this.spinner.show();
+    // this.spinner.show();
 
     this.totalRequests++;
     return next.handle(request).pipe(
@@ -28,7 +28,7 @@ export class LoadingInterceptor implements HttpInterceptor {
         this.totalRequests--;
         if (this.totalRequests == 0) {
           setTimeout(() => {
-            this.spinner.hide();
+            // this.spinner.hide();
           }, 1000);
         }
       })

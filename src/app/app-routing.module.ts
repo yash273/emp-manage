@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from 'src/shared/components/page-not-found/page-not-found.component';
 import { canActivateGuard } from './helpers/can-activate.guard';
+import { SettingsComponent } from './modules/settings/settings.component';
 
 const routes: Routes = [
   {
@@ -35,9 +36,16 @@ const routes: Routes = [
       import('./modules/employee/employee.module').then((m) => m.EmployeeModule),
   },
   {
+    path: 'settings',
+    loadChildren: () =>
+      import('./modules/settings/settings.module').then((m) => m.SettingsModule)
+    // component: SettingsComponent
+  },
+  {
     path: '**',
     component: PageNotFoundComponent
   }
+
 ];
 
 @NgModule({

@@ -68,6 +68,23 @@
                         <mat-error *ngIf="userForm.get('confirm_password')?.hasError('passwordMismatch')">{{'employee.ff.confirm_password.error' |
                             translate}}</mat-error>
                     </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Date Of Birth</mat-label>
+
+
+                        <input formControlName="dob" matInput [matDatepicker]="picker">
+
+                        <mat-hint>{{selectedDateFormat | uppercase}}</mat-hint>
+
+                        <mat-error *ngIf="userForm.get('dob')?.hasError('required')">{{'employee.ff.first_name.error' | translate}}</mat-error>
+
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+
+                        <mat-datepicker #picker></mat-datepicker>
+
+                    </mat-form-field>
+
                     <div class="selection-div">
                         <mat-form-field appearance="fill">
                             <mat-label>{{'employee.ff.country.label' | translate}}</mat-label>
@@ -113,7 +130,7 @@
                                 translate}}</button>
                             <button *ngIf="userId" mat-stroked-button color="primary" type="submit" (click)="EditUser()">{{'employee.button.edit' |
                                 translate}}</button>
-                            <button mat-stroked-button color="primary" type="button" routerLink="/dashboard">{{'employee.button.cancel' |
+                            <button mat-stroked-button color="primary" type="button" routerLink="/employee">{{'employee.button.cancel' |
                                 translate}}</button>
                         </span>
                     </mat-card-actions>

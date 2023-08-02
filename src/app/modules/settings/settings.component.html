@@ -1,0 +1,40 @@
+<div class="top-container">
+    <button mat-icon-button color="accent" (click)="drawer.toggle()" class="example-icon close-button">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <app-header></app-header>
+</div>
+<mat-drawer-container class="example-container" autosize>
+
+    <mat-drawer #drawer class="sidenav" mode="side" opened>
+
+        <app-sidebar></app-sidebar>
+
+    </mat-drawer>
+
+    <div class="user-wrapper">
+        <mat-card class="user-card">
+            <mat-card-header>
+                <mat-card-title>Settings</mat-card-title>
+                <mat-card-subtitle>enter details</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-label>Choose Date Format:</mat-label>
+                <mat-radio-group aria-label="Select an option" [(ngModel)]="selectedFormat">
+                    <div class="options">
+                        <mat-radio-button class="example-radio-button" *ngFor="let format of formats" [value]="format.value">
+                            {{format.name}}
+                        </mat-radio-button>
+                    </div>
+                </mat-radio-group>
+            </mat-card-content>
+            <mat-card-actions>
+                <span>
+                    <button mat-stroked-button color="primary" type="button" (click)="save()">Save</button>
+                </span>
+            </mat-card-actions>
+
+        </mat-card>
+    </div>
+
+</mat-drawer-container>

@@ -25,13 +25,18 @@ export class CityAddEditComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
+
+  }
+  ngOnInit(): void {
     this.stateService.getStates().subscribe((res) => {
       this.states = res;
     });
-  }
 
-  ngOnInit(): void {
-    this.cityId = this.route.snapshot.params['id'];
+    this.route.queryParams
+      .subscribe(params => {
+        this.cityId = params['id'];
+      });
+
     this.initForm();
     if (this.cityId) {
       this.populateForm();
@@ -74,7 +79,7 @@ export class CityAddEditComponent implements OnInit {
           this.sharedService.showAlert("Oops! Something Went Wrong!", 'default');
         }
       });
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/city']);
     } else {
       this.sharedService.showAlert('Form is invalid. Please check the fields.', 'error');
     }
@@ -92,7 +97,7 @@ export class CityAddEditComponent implements OnInit {
             this.sharedService.showAlert("Oops! Something Went Wrong!", 'default');
           }
         });
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/city']);
       }
     } else {
       this.sharedService.showAlert('Form is invalid. Please check the fields.', 'error');

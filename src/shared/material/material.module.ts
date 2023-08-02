@@ -22,6 +22,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MomentDateModule } from '@angular/material-moment-adapter';
 const matModules = [
   MatButtonModule,
   MatIconModule,
@@ -44,7 +47,10 @@ const matModules = [
   MatMenuModule,
   DragDropModule,
   MatListModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  // MomentDateModule
 ];
 
 @NgModule({
