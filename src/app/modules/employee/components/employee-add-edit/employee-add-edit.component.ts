@@ -5,13 +5,23 @@ import { AuthService } from 'src/app/core/auth/service/auth.service';
 import { email, mob, name, pass } from 'src/shared/regex-rules/regex-rule';
 import { EncryptDecryptService } from 'src/shared/service/encrypt-decrypt.service';
 import { SharedService } from 'src/shared/service/shared.service';
-import { DateAdapter } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+import { FormatDatePickerService } from 'src/shared/service/format-date-picker.service';
+import { PICK_FORMATS } from 'src/shared/constants/date-formats';
 
 
 @Component({
   selector: 'app-employee-add-edit',
   templateUrl: './employee-add-edit.component.html',
   styleUrls: ['./employee-add-edit.component.scss'],
+  providers: [
+    {
+      provide: DateAdapter, useClass: FormatDatePickerService
+    },
+    {
+      provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS
+    }
+  ]
 })
 export class EmployeeAddEditComponent {
   userForm!: FormGroup;
@@ -33,7 +43,8 @@ export class EmployeeAddEditComponent {
     private sharedService: SharedService,
     private router: Router,
     private route: ActivatedRoute,
-    private dateAdapter: DateAdapter<Date>
+    private formatDatePickerService: FormatDatePickerService
+    // private dateAdapter: DateAdapter<Date>
   ) {
 
   }
@@ -54,22 +65,26 @@ export class EmployeeAddEditComponent {
     this.userId = this.route.snapshot.params['id'];
     if (this.userId) {
       this.populateForm();
+
     };
 
-    this.changeDateFormats();
   }
 
   changeDateFormats() {
-
-    if (this.selectedDateFormat === 'dd/MM/yyyy') {
-      this.dateAdapter.setLocale('en-in');
-    } else if (this.selectedDateFormat === 'MM/dd/yyyy') {
-      this.dateAdapter.setLocale('en-us');
-    } else if (this.selectedDateFormat === 'yyyy/MM/dd') {
-      this.dateAdapter.setLocale('en-ca');
-    } else {
-      this.dateAdapter.setLocale('en-us');
-    }
+    // debugger
+    const x = this.formatDatePickerService.format(this.userForm.value.dob, this.selectedDateFormat);
+    console.log(x);
+    this.userForm.get('dob')?.patchValue(x);
+    console.log(this.userForm.get('dob')?.value)
+    // if (this.selectedDateFormat === 'dd/MM/yyyy') {
+    //   this.dateAdapter.setLocale('en-in');
+    // } else if (this.selectedDateFormat === 'MM/dd/yyyy') {
+    //   this.dateAdapter.setLocale('en-us');
+    // } else if (this.selectedDateFormat === 'yyyy/MM/dd') {
+    //   this.dateAdapter.setLocale('en-ca');
+    // } else {
+    //   this.dateAdapter.setLocale('en-us');
+    // }
 
   }
 
@@ -166,7 +181,8 @@ export class EmployeeAddEditComponent {
       });
       this.router.navigate(['/employee'])
     } else {
-      console.log(this.userForm.value.dob)
+      this.changeDateFormats();
+
       this.sharedService.showAlert("Form is invalid. Please check the fields.", 'error');
     }
   }
