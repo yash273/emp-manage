@@ -6,6 +6,7 @@ import { SettingsComponent } from './settings.component';
 import { SharedModule } from 'src/shared/shared.module';
 import { MaterialModule } from 'src/shared/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -14,6 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
+
     SettingsRoutingModule,
     SharedModule,
     MaterialModule,

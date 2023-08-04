@@ -7,7 +7,6 @@ import { SharedService } from 'src/shared/service/shared.service';
 
 
 export const canActivateGuard: CanActivateFn = async (route, state) => {
-  // debugger
   const router = inject(Router);
   const authService = inject(AuthService);
   const sharedService = inject(SharedService);

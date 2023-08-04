@@ -10,6 +10,7 @@ import { HeaderComponent } from 'src/shared/components/header/header.component';
 import { SidebarComponent } from 'src/shared/components/sidebar/sidebar.component';
 import { SharedModule } from 'src/shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -22,6 +23,8 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     CountryRoutingModule,
     MaterialModule,
+    HttpClientModule,
+
     FormsModule,
     ReactiveFormsModule,
     SharedModule,

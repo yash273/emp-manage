@@ -8,6 +8,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SharedModule } from 'src/shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -21,6 +22,8 @@ import { TranslateModule } from '@ngx-translate/core';
     NgxChartsModule,
     NgxSpinnerModule,
     SharedModule,
+    HttpClientModule,
+
     TranslateModule
   ]
 })

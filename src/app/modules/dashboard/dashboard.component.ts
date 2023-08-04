@@ -75,10 +75,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Locations';
   showYAxisLabel = true;
   showDataLabel = true;
-  yAxisLabel = 'Users';
+  // yAxisLabel = 'Users';
   colorScheme = 'picnic';
   noBarWhenZero = false;
   legendPosition: any = 'right';

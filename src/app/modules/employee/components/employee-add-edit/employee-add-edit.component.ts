@@ -14,6 +14,7 @@ import { PICK_FORMATS } from 'src/shared/constants/date-formats';
   selector: 'app-employee-add-edit',
   templateUrl: './employee-add-edit.component.html',
   styleUrls: ['./employee-add-edit.component.scss'],
+  animations: [],
   providers: [
     {
       provide: DateAdapter, useClass: FormatDatePickerService
@@ -25,6 +26,7 @@ import { PICK_FORMATS } from 'src/shared/constants/date-formats';
 })
 export class EmployeeAddEditComponent {
 
+  uId = 1;
   userForm!: FormGroup;
   hide: boolean = true;
   hideConfirm: boolean = true;
@@ -53,9 +55,7 @@ export class EmployeeAddEditComponent {
     this.getFormatFromLocal();
     this.getCountries();
     this.userId = this.route.snapshot.params['id'];
-    if (this.userId) {
-      this.populateForm();
-    };
+    this.populateForm();
   }
 
   getFormatFromLocal() {
@@ -93,26 +93,28 @@ export class EmployeeAddEditComponent {
   }
 
   populateForm() {
-    this.authService.getUserData(this.userId).subscribe((res) => {
-      const userRoutes = res.route_rights;
+    if (this.userId) {
+      this.authService.getUserData(this.userId).subscribe((res) => {
+        const userRoutes = res.route_rights;
 
-      userRoutes.forEach((key) => {
-        if (this.initialRoutes.hasOwnProperty(key)) {
-          this.initialRoutes[key] = true;
+        userRoutes.forEach((key) => {
+          if (this.initialRoutes.hasOwnProperty(key)) {
+            this.initialRoutes[key] = true;
+          }
+        });
+        this.initialRoutes;
+        const { password, ...previousData } = res;
+        previousData.role = res.role.toString();
+        this.userForm.removeControl('confirm_password');
+        this.userForm.patchValue(previousData);
+        this.getStates('update');
+        this.getCites('update');
+      },
+        (err) => {
+          this.router.navigate(['**']);
         }
-      });
-      this.initialRoutes;
-      const { password, ...previousData } = res;
-      previousData.role = res.role.toString();
-      this.userForm.removeControl('confirm_password');
-      this.userForm.patchValue(previousData);
-      this.getStates('update');
-      this.getCites('update');
-    },
-      (err) => {
-        this.router.navigate(['**']);
-      }
-    );
+      );
+    }
   }
 
   getAllRoutes() {
