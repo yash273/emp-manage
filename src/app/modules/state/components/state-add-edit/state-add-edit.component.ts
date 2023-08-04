@@ -26,12 +26,9 @@ export class StateAddEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.stateId = this.route.snapshot.params['id'];
     this.getCountries();
     this.initForm();
-    if (this.stateId) {
-      this.populateForm();
-    }
+    this.getStateDataFromResolver();
   }
 
   initForm() {
@@ -39,6 +36,17 @@ export class StateAddEditComponent implements OnInit {
       countryId: ['', Validators.required],
       name: ['', Validators.required]
     })
+  }
+
+  getStateDataFromResolver() {
+    this.route.data.subscribe((data) => {
+      this.prevData = data['state'];
+      if (this.prevData) {
+        this.stateId = this.prevData.id;
+        this.stateForm.get('countryId')?.disable();
+        this.stateForm.patchValue(this.prevData);
+      }
+    });
   }
 
   countryChange() {
@@ -49,20 +57,6 @@ export class StateAddEditComponent implements OnInit {
     this.sharedService.getCounties().subscribe((res) => {
       this.countries = res;
     })
-  }
-
-  populateForm() {
-    if (this.stateId) {
-      this.stateService.getStateData(this.stateId).subscribe((res) => {
-        this.prevData = res;
-        this.stateForm.get('countryId')?.disable();
-        this.stateForm.patchValue(this.prevData);
-      },
-        (err) => {
-          this.router.navigate(['**']);
-        }
-      );
-    }
   }
 
   addState() {

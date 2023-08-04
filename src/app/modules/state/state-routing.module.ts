@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StateListComponent } from './components/state-list/state-list.component';
 import { StateAddEditComponent } from './components/state-add-edit/state-add-edit.component';
 import { canActivateGuard } from 'src/app/helpers/can-activate.guard';
+import { stateResolver } from './service/state.resolver';
 
 const routes: Routes = [
   {
@@ -18,7 +19,10 @@ const routes: Routes = [
   {
     path: 'edit/:id',
     canActivate: [canActivateGuard],
-    component: StateAddEditComponent
+    component: StateAddEditComponent,
+    resolve: {
+      state: stateResolver
+    }
   }
 ];
 
