@@ -6,14 +6,10 @@ import { NativeDateAdapter } from '@angular/material/core';
   providedIn: 'root'
 })
 export class FormatDatePickerService extends NativeDateAdapter {
+
+  displayFormat = localStorage.getItem("format") || 'MM/dd/yyyy';
+
   override format(date: Date, displayFormat: Object): string {
-    if (displayFormat === 'dd/MM/yyyy') {
-      return formatDate(date, 'dd/MM/yyyy', this.locale)
-    } else if (displayFormat === 'MM/dd/yyyy') {
-      return formatDate(date, 'MM/dd/yyyy', this.locale)
-    }
-    else {
-      return formatDate(date, 'MM/dd/yyyy', this.locale)
-    }
+    return formatDate(date, this.displayFormat, this.locale);
   }
 }

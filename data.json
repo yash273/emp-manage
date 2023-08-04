@@ -6,17 +6,15 @@
       "email": "demo@mail.com",
       "mobile": 9955668822,
       "role": 2,
-      "password": "$2a$08$TnR2sGvwtMA4cP4tEGdJouXoxYQr9.Qy2CFCjW2zIH4AzeTsBw02u",
-      "dob": "2023-08-09T18:30:00.000Z",
+      "password": "$2a$08$88Mav7SD3XjWeMTrNelnf.33srIZQD/neutRpPEKSvewpJKZ80ZuC",
+      "dob": "2023-08-30T18:30:00.000Z",
       "country": 2,
       "state": 5,
       "city": 11,
       "route_rights": [
         1,
         2,
-        3,
-        4,
-        5
+        3
       ],
       "id": 4
     },
@@ -95,16 +93,19 @@
       "email": "john.doe@mail.com",
       "mobile": 5555555555,
       "role": 1,
-      "password": "$2a$08$FZ4fWfn6yF4ZItkX.jhAUO4KNkEunwZ6eIlCT7J1P50yYhBV0URX6",
+      "password": "$2a$08$yFBW8Xq8LQPoKQO6vc7JvOvFJVcoPWw9Lh6QwhOR4fHxzTNYVyt2G",
+      "dob": "2023-08-02T18:30:00.000Z",
       "country": 4,
       "state": 10,
       "city": 16,
       "route_rights": [
         1,
+        2,
         3,
         5,
-        7,
-        8
+        6,
+        8,
+        12
       ],
       "id": 8
     },

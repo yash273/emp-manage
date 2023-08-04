@@ -23,10 +23,10 @@ export class SidebarComponent implements OnInit {
     private router: Router,
     public translate: TranslateService
   ) {
-    this.userId = this.sharedService.getUserFromLocal();
   }
 
   ngOnInit(): void {
+    this.userId = this.sharedService.getUserFromLocal();
     this.getUserAndFilteredRoutes(this.userId);
   }
 
@@ -61,13 +61,13 @@ export class SidebarComponent implements OnInit {
 
   getRouterLink(mainMenu: any): any[] {
     const accessibleRoute = mainMenu.subMenuItems.find((r: any) => this.filteredRoutes.find((fr) => fr.route === r.route));
-
     if (accessibleRoute) {
       return [accessibleRoute.route];
     } else {
       return ['/dashboard'];
     }
   }
+
   getIconForRoute(route: string): string {
     switch (route) {
       case 'country':

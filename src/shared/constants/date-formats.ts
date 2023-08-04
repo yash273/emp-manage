@@ -1,9 +1,11 @@
 export const PICK_FORMATS = {
-    parse: { dateInput: { month: 'short', year: 'numeric', day: 'numeric' } },
+    parse: {
+        dateInput: 'input',
+    },
     display: {
         dateInput: 'input',
-        monthYearLabel: { year: 'numeric', month: 'short' },
-        dateA11yLabel: { year: 'numeric', month: 'long', day: 'numeric' },
-        monthYearA11yLabel: { year: 'numeric', month: 'long' }
-    }
+        monthYearLabel: 'MMM yyyy',
+        dateA11yLabel: 'LL',
+        monthYearA11yLabel: 'MMMM yyyy',
+    },
 };

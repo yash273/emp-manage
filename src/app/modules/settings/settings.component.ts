@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 
@@ -37,18 +36,15 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
     const dateFormat = localStorage.getItem("format");
     if (dateFormat) {
-      this.selectedFormat = dateFormat
+      this.selectedFormat = dateFormat;
     } else {
-      this.selectedFormat = 'MM/dd/yyyy'
+      this.selectedFormat = 'MM/dd/yyyy';
     }
   }
 
   save() {
     localStorage.setItem("format", this.selectedFormat);
-    console.log(this.selectedFormat);
-    this.router.navigate(['/employee'])
+    this.router.navigate(['/employee']);
   }
-
-
 
 }

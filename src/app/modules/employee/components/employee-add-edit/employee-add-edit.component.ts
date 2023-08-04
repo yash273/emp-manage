@@ -24,6 +24,7 @@ import { PICK_FORMATS } from 'src/shared/constants/date-formats';
   ]
 })
 export class EmployeeAddEditComponent {
+
   userForm!: FormGroup;
   hide: boolean = true;
   hideConfirm: boolean = true;
@@ -35,7 +36,6 @@ export class EmployeeAddEditComponent {
   routes!: any;
   initialRoutes: { [key: number]: boolean } = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false, 10: false, 11: false, 12: false };
 
-
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -43,50 +43,35 @@ export class EmployeeAddEditComponent {
     private sharedService: SharedService,
     private router: Router,
     private route: ActivatedRoute,
-    private formatDatePickerService: FormatDatePickerService
-    // private dateAdapter: DateAdapter<Date>
-  ) {
-
-  }
+  ) { }
 
   selectedDateFormat: string = 'MM/dd/yyyy';
 
   ngOnInit(): void {
     this.initializeForm();
     this.getAllRoutes()
+    this.getFormatFromLocal();
+    this.getCountries();
+    this.userId = this.route.snapshot.params['id'];
+    if (this.userId) {
+      this.populateForm();
+    };
+  }
 
+  getFormatFromLocal() {
     const dateFormat = localStorage.getItem("format");
     if (dateFormat) {
       this.selectedDateFormat = dateFormat;
     } else {
       this.selectedDateFormat = 'MM/dd/yyyy';
     }
-    this.getCountries();
-    this.userId = this.route.snapshot.params['id'];
-    if (this.userId) {
-      this.populateForm();
-
-    };
-
   }
 
-  changeDateFormats() {
-    // debugger
-    const x = this.formatDatePickerService.format(this.userForm.value.dob, this.selectedDateFormat);
-    console.log(x);
-    this.userForm.get('dob')?.patchValue(x);
-    console.log(this.userForm.get('dob')?.value)
-    // if (this.selectedDateFormat === 'dd/MM/yyyy') {
-    //   this.dateAdapter.setLocale('en-in');
-    // } else if (this.selectedDateFormat === 'MM/dd/yyyy') {
-    //   this.dateAdapter.setLocale('en-us');
-    // } else if (this.selectedDateFormat === 'yyyy/MM/dd') {
-    //   this.dateAdapter.setLocale('en-ca');
-    // } else {
-    //   this.dateAdapter.setLocale('en-us');
-    // }
-
-  }
+  dateFilter = (date: Date | null): boolean => {
+    if (!date) return false;
+    const currentDate = new Date();
+    return date <= currentDate;
+  };
 
   initializeForm() {
     return this.userForm = this.formBuilder.group({
@@ -181,8 +166,6 @@ export class EmployeeAddEditComponent {
       });
       this.router.navigate(['/employee'])
     } else {
-      this.changeDateFormats();
-
       this.sharedService.showAlert("Form is invalid. Please check the fields.", 'error');
     }
   }
@@ -194,6 +177,7 @@ export class EmployeeAddEditComponent {
       .map(Number);
 
     if (this.userForm.valid) {
+
       const formData = { ...this.userForm.value };
       formData.role = parseInt(formData.role, 10);
       formData.route_rights = trueRoutes;
@@ -247,7 +231,5 @@ export class EmployeeAddEditComponent {
       this.userForm.get('city')?.setValue(null);
     }
   }
-
-
 
 }

@@ -9,7 +9,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 
-
 @NgModule({
   declarations: [
     EmployeeListComponent,
