@@ -13,4 +13,8 @@
         <mat-icon matListItemIcon>settings</mat-icon>
         <div matListItemTitle>Settings</div>
     </mat-list-item>
+    <mat-list-item [routerLinkActive]="['active-link']" [routerLink]="'/tab'">
+        <mat-icon matListItemIcon>table_chart</mat-icon>
+        <div matListItemTitle>Lazy-tabs</div>
+    </mat-list-item>
 </mat-list>

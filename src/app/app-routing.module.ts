@@ -39,7 +39,11 @@ const routes: Routes = [
     path: 'settings',
     loadChildren: () =>
       import('./modules/settings/settings.module').then((m) => m.SettingsModule)
-    // component: SettingsComponent
+  },
+  {
+    path: 'tab',
+    loadChildren: () =>
+      import('./modules/lazy-tab/lazy-tab.module').then((m) => m.LazyTabModule)
   },
   {
     path: '**',

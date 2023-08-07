@@ -17,4 +17,8 @@ export class EmployeeService {
   getEmployees(): Observable<User[]> {
     return this.http.get<User[]>(environment.baseURL + `users`)
   }
+
+  getEmployeeInState(stateId: number): Observable<User[]> {
+    return this.http.get<User[]>(environment.baseURL + `users?state=${stateId}`)
+  }
 }

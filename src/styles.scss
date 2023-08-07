@@ -40,3 +40,5 @@ app-header{width: 100%;}
 }
 .flag{width: 30px;margin-right: 6px;}
 .option{display: flex;align-items: center;}
+.mat-mdc-tab-labels .mdc-tab{padding-right: 0;padding-left: 0;}
+.tab-label{padding: 0 24px;min-width: 90px;display: flex;height: 44px;align-items: center;justify-content: center;text-align: center;cursor: pointer;}
